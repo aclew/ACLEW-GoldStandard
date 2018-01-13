@@ -1,0 +1,13 @@
+name: aclew-goldstdtest
+title: ACLEW-GoldStdTest
+username:
+account: middycasillas
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 252866
+bundleId: 1175006
+url: https://middycasillas.shinyapps.io/aclew-goldstdtest/
+when: 1515882535.38813
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: VanDamFJ11-GS_Training_Round_2-HG.txt

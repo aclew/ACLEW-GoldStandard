@@ -1,0 +1,12 @@
+name: GSCompareAppEs
+title: GSCompareAppEs
+username:
+account: middycasillas
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 253120
+bundleId: 1159095
+url: https://middycasillas.shinyapps.io/GSCompareAppEs/
+when: 1514913516.87234
+asMultiple: FALSE
+asStatic: FALSE

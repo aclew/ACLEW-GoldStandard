@@ -1,0 +1,12 @@
+name: aclew-pruebagoldstd
+title: aclew-pruebagoldstd
+username:
+account: middycasillas
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 253122
+bundleId: 1159972
+url: https://middycasillas.shinyapps.io/aclew-pruebagoldstd/
+when: 1514968868.22665
+asMultiple: FALSE
+asStatic: FALSE

@@ -1,0 +1,12 @@
+name: aclew-goldstdtest
+title: GSCompareAppEs
+username:
+account: middycasillas
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 252866
+bundleId: 1159088
+url: https://middycasillas.shinyapps.io/aclew-goldstdtest/
+when: 1514913357.16331
+asMultiple: FALSE
+asStatic: FALSE
