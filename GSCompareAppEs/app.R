@@ -25,7 +25,7 @@ ui <- fluidPage(
                      placeholder = 'Seleccioná una grabación',
                      onInitialize = I('function() { this.setValue(""); }'))),
 
-            # Input: Annotated minute ----
+      # Input: Annotated minute ----
       selectizeInput("minute", "¿Qué minuto querés evaluar?",
                    choices = 1:5,
                    options = list(
@@ -106,9 +106,9 @@ server <- function(input, output) {
     errors <- report()$errors.tbl
   
     output$downloadErrorsHandler <- downloadHandler(
-      filename = paste0("GS_comparison-",time.now,"-detected_errors-",
-             input$recording,"-minute_", input$minute,
-             "-by_", input$coder, "_from_", input$PI, ".csv"),
+      filename = paste0("GS_comparacion-",time.now,"-errores_encontrados-",
+             input$recording,"-minuto_", input$minute,
+             "-por_", input$coder, "_de_", input$PI, ".csv"),
       content = function(file) {
         write.csv(errors, file, row.names = FALSE)
       },

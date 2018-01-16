@@ -1,0 +1,12 @@
+name: GSCompareApp
+title: GSCompareApp
+username:
+account: aclew
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 257315
+bundleId: 1178496
+url: https://aclew.shinyapps.io/GSCompareApp/
+when: 1516117083.33474
+asMultiple: FALSE
+asStatic: FALSE

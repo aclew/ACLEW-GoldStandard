@@ -24,14 +24,15 @@ intersect.spk.tiers <- function(annA, annB, tierA, tierB,
     for (row in 1:nrow(segAB.spch)) {
       startannot <- ifelse(segAB.spch$start[row] < seg_stt, seg_stt,
                            segAB.spch$start[row])
-      stopannot <- ifelse(segAB.spch$stop[row] > seg_end, seg_end,
+      stopannot <- ifelse(segAB.spch$stop[row] > (seg_end - slice_sz),
+                          (seg_end - slice_sz),
                           segAB.spch$stop[row])
       if (segAB.spch$coder[row] == "A") {
         ABtbl$spchA[max(which(ABtbl$slice <= startannot)):
-                     (min(which(ABtbl$slice >= stopannot))-1)] <- 1
+                     (min(which(ABtbl$slice >= stopannot)))] <- 1
       } else {
         ABtbl$spchB[max(which(ABtbl$slice <= startannot)):
-                     (min(which(ABtbl$slice >= stopannot))-1)] <- 1
+                     (min(which(ABtbl$slice >= stopannot)))] <- 1
       }
     }
   }
@@ -64,12 +65,12 @@ intersect.tiers <- function(annA, annB, tiertype,
   # Set up comparison table
   if (ttyp == "ort") {
     ABtbl <- tibble(
-      slice = seq(seg_stt, seg_end + slice_sz, slice_sz),
+      slice = seq(seg_stt, seg_end - slice_sz, slice_sz),
       spchA = 0,
       spchB = 0)
   } else {
     ABtbl <- tibble(
-      slice = seq(seg_stt, seg_end + slice_sz, slice_sz),
+      slice = seq(seg_stt, seg_end - slice_sz, slice_sz),
       spchA = 0,
       spchB = 0,
       valA = "NA",
@@ -80,14 +81,15 @@ intersect.tiers <- function(annA, annB, tiertype,
     for (row in 1:nrow(segAB.spch)) {
       startannot <- ifelse(segAB.spch$start[row] < seg_stt, seg_stt,
                            segAB.spch$start[row])
-      stopannot <- ifelse(segAB.spch$stop[row] > seg_end, seg_end,
+      stopannot <- ifelse(segAB.spch$stop[row] > (seg_end - slice_sz),
+                          (seg_end - slice_sz),
                           segAB.spch$stop[row])
       if (segAB.spch$coder[row] == "A") {
         ABtbl$spchA[max(which(ABtbl$slice <= startannot)):
-                     (min(which(ABtbl$slice >= stopannot))-1)] <- 1
+                     (min(which(ABtbl$slice >= stopannot)))] <- 1
       } else {
         ABtbl$spchB[max(which(ABtbl$slice <= startannot)):
-                     (min(which(ABtbl$slice >= stopannot))-1)] <- 1
+                     (min(which(ABtbl$slice >= stopannot)))] <- 1
       }
     }
   }
@@ -98,20 +100,19 @@ intersect.tiers <- function(annA, annB, tiertype,
       for (row in 1:nrow(segAB.dpdt)) {
         startannot <- ifelse(segAB.dpdt$start[row] < seg_stt, seg_stt,
                              segAB.dpdt$start[row])
-        stopannot <- ifelse(segAB.dpdt$stop[row] > seg_end, seg_end,
+        stopannot <- ifelse(segAB.dpdt$stop[row] > (seg_end - slice_sz),
+                          (seg_end - slice_sz),
                             segAB.dpdt$stop[row])
         valannot <- segAB.dpdt$code[row]
         if (segAB.dpdt$coder[row] == "A") {
           ABtbl$valA[max(which(ABtbl$slice <= startannot)):
-                       (min(which(ABtbl$slice >= stopannot))-1)] <- valannot
+                       (min(which(ABtbl$slice >= stopannot)))] <- valannot
         } else {
           ABtbl$valB[max(which(ABtbl$slice <= startannot)):
-                       (min(which(ABtbl$slice >= stopannot))-1)] <- valannot
+                       (min(which(ABtbl$slice >= stopannot)))] <- valannot
         }
       }
     }
-  }
-  if (ttyp != "ort") {
     ABtbl <- ABtbl %>%
       filter(spchA == 1 & spchB == 1) %>%
       mutate(match = as.numeric(valA == valB), tier = tiertype) %>%

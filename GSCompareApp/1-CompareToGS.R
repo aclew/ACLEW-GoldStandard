@@ -168,8 +168,6 @@ compare.files <- function(nw.filename, recording, minute, coder, lab) {
         }
       }
     }
-    print(tier.equiv.temp)
-    print(gs.tiers.temp)
     if (mean(gs.tiers.temp$slice_match_n) > top.score) {
       tier.equiv <- tier.equiv.temp
       gs.tiers <- gs.tiers.temp
