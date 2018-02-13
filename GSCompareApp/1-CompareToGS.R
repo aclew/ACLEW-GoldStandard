@@ -2,7 +2,7 @@ library(tidyverse)
 library(gtools)
 source("0-Helper_CompareToGS.R")
 
-compare.files <- function(nw.filename, recording, minute, coder, lab) {
+compare.files <- function(nw.filename, recording, native, minute, coder, lab) {
   ################################################################################
   # Set up
   ################################################################################
@@ -11,20 +11,26 @@ compare.files <- function(nw.filename, recording, minute, coder, lab) {
   nw.file <- read.annot(nw.filename)
   nw.file$code[which(is.na(nw.file$code))] <- "<empty>"
   gs.file <- read.annot(paste0(recording, "-0GS0.txt"))
+  ntvness <- ifelse(native == "Yes", "native", "NON-native")
   
   compare.stmt <- paste0("Comparing minute ", minute, " of recording ",
                         recording, " to the gold standard.")
-  coder.stmt <- paste0("Submitted by coder ", coder, " from the ", lab, " lab.")
+  coder.stmt <- paste0("Submitted by coder ", coder, " from the ", lab,
+                       " lab, who is a ", ntvness,
+                       " speaker of the language in the recording.")
   
   # Input arguments
   slice_sz <- 50 # size of time slices compared
-  min_score <- 0.85 # minumum score allowed on any tier
-  min_subpart <- 0.9 # the minimum score needed to pass a sub-part
-  min_subpart_passes <- 3 # minimum number of sub-parts they must pass (3 max)
-  min_overall_score <- 0.95 # minimum overall weighted score
   strict <- "yes" # # Possibly TO-DO for later: we could use this to test 
                   # different equivalencies (e.g., if we want softer constraints,
                   # like 'B' can count as 'A' or 'C')
+  min_overall_score <- 0.95 # minimum overall weighted score
+  min_score_univ <- 0.85 # minumum score allowed on diarization and vcm
+  if (native == "Yes") {
+    min_score_lgsp <- 0.85 # minumum score allowed on lex, mwu, and xds
+  } else {
+    min_score_lgsp <- 0.75 # minumum score allowed on lex, mwu, and xds
+  }
   
 
   ################################################################################
@@ -52,7 +58,7 @@ compare.files <- function(nw.filename, recording, minute, coder, lab) {
   filter(stop > seg_stt & start < seg_end & (!is.na(speaker))) %>%
   select(tier, speaker) %>% distinct() %>% arrange(speaker) %>%
   mutate(slice_match = "", n_annots = "", sec_annots = "",
-         slice_match_n = 0)
+         slice_match_n = 0, nsec_spch = 0)
 
   # CHI is always matched with CHI
   tier.equiv$your.spkr[which(tier.equiv$gs.spkr == "CHI")] <- "CHI"
@@ -117,7 +123,7 @@ compare.files <- function(nw.filename, recording, minute, coder, lab) {
       filter(stop > seg_stt & start < seg_end & (!is.na(speaker))) %>%
       select(tier, speaker) %>% distinct() %>% arrange(speaker) %>%
       mutate(slice_match = "", n_annots = "", sec_annots = "",
-             slice_match_n = 0)
+             slice_match_n = 0, nsec_spch = 0)
     
     # Fill in report values
     for (tiertype in gs.tiers.temp$tier) {
@@ -134,6 +140,7 @@ compare.files <- function(nw.filename, recording, minute, coder, lab) {
         }
         gs.tiers.temp$slice_match[gs.row] <- "0%"
         gs.tiers.temp$slice_match_n[gs.row] <- 0
+        gs.tiers.temp$nsec_spch[gs.row] <- round(sum(segA$duration)/1000,2)
       } else {
         # Fill in n_annots and sec_annots values
         segA <- gs.file %>%
@@ -151,6 +158,7 @@ compare.files <- function(nw.filename, recording, minute, coder, lab) {
                 " (GS:",round(sum(segA$duration)/1000,2),", You:",
                 round(sum(segB$duration)/1000,2),")", sep="")
         }
+        gs.tiers.temp$nsec_spch[gs.row] <- round(sum(segA$duration)/1000,2)
         # Fill in the slice_match value
         comparison.tbl <- intersect.tiers(gs.file, nw.file.temp,
                                           tiertype, seg_stt, seg_end, strict, slice_sz)
@@ -200,14 +208,30 @@ compare.files <- function(nw.filename, recording, minute, coder, lab) {
   # Tiers with speech
   tiers.w.spch <- tier.equiv[tier.equiv$gs.spkr %in% unique(gs.tiers$speaker),]
   
+  # Add tier weights
+  gs.tiers$weight <- 0
+  gs.tiers$weight[which(gs.tiers$tier == "CHI")] <- 1
+  nonCHI.spch.rows <- which(!(grepl('@|CHI', gs.tiers$tier)))
+  gs.tiers$weight[nonCHI.spch.rows] <- round(gs.tiers$nsec_spch[nonCHI.spch.rows]/
+    sum(gs.tiers$nsec_spch[nonCHI.spch.rows]),2)
+  xds.rows <- which((grepl('xds@', gs.tiers$tier)))
+  gs.tiers$weight[xds.rows] <- gs.tiers$weight[xds.rows-1]
+  chi.dep.rows <- which((grepl('@CHI', gs.tiers$tier)))
+  gs.tiers$weight[chi.dep.rows] <- 1
+
+  # Clean up tier-based report
   gs.tiers.print <- gs.tiers %>%
-    select(-speaker, -slice_match_n) %>%
+    select(-speaker, -slice_match_n, -nsec_spch) %>%
     mutate(slice_match = replace(slice_match, slice_match=="NaN%", "0%"))
 
   # Sub-part scores
   chi.diar <- ""
   nch.diar <- ""
-  dep.acc <- ""
+  xds.acc <- ""
+  chi.dep.acc <- ""
+  vcm.acc <- ""
+  lex.acc <- ""
+  mwu.acc <- ""
   if (nrow(filter(gs.tiers, tier == "CHI") > 0)) {
     chi.score <- as.numeric(gs.tiers %>% filter(tier == "CHI") %>%
                               select(slice_match_n) %>%
@@ -216,37 +240,82 @@ compare.files <- function(nw.filename, recording, minute, coder, lab) {
   } else {
     chi.diar <- "CHI diarization: <nothing to evaluate>"
   }
-  if (nrow(filter(gs.tiers, tier != "CHI") > 0)) {
+  if (nrow(filter(gs.tiers, tier != "CHI")) > 0) {
     non.chi.score <- as.numeric(gs.tiers %>%
                                   filter(tier == speaker & tier != "CHI") %>%
                                   replace_na(list(slice_match_n = 0)) %>%
-                                  summarise(mean(slice_match_n)))
-    nch.diar <- paste("Non-CHI diarization: ",round(non.chi.score*100, 2),"%",
+                                  mutate(wgtd.tier.score = slice_match_n * weight) %>%
+                                  summarise(sum(wgtd.tier.score)))
+    nch.diar <- paste("Non-CHI diarization: ", round(non.chi.score*100, 2),"%",
                    sep="")
   } else {
     nch.diar <- "Non-CHI diarization: <nothing to evaluate>"
   }
-  if (sum(grepl('@', gs.tiers$tier)) > 0) {
-    dep.score <- as.numeric(gs.tiers %>% filter(tier != speaker) %>%
+  if (sum(grepl('xds@', gs.tiers$tier)) > 0) {
+    xds.score <- as.numeric(gs.tiers %>%
+                              filter(grepl('xds@', tier)) %>%
                               replace_na(list(slice_match_n = 0)) %>%
-                              summarise(mean(slice_match_n)))
-    dep.acc <- paste("vcm/lex/mlu/xds: ",round(dep.score*100, 2),"%", sep="")
+                              mutate(wgtd.tier.score = slice_match_n * weight) %>%
+                              summarise(sum(wgtd.tier.score)))
+    xds.acc <- paste("Overall xds: ", round(xds.score*100, 2),"%", sep="")
   } else {
-    dep.acc <- "vcm/lex/mlu/xds: <nothing to evaluate>"
+    xds.acc <- "Overall xds: <nothing to evaluate>"
   }
+  if (sum(grepl('@CHI', gs.tiers$tier)) > 0) {
+    chi.dep.score <- as.numeric(gs.tiers %>%
+                              filter(tier != speaker & speaker == "CHI") %>%
+                              select(slice_match_n) %>%
+                              summarise(mean(slice_match_n)))
+    chi.dep.acc <- paste0("CHI vcm/lex/mwu: ", round(chi.dep.score*100, 2), "%")
+  } else {
+    chi.dep.acc <- "CHI vcm/lex/mwu: <nothing to evaluate>"
+  }
+  if (sum(grepl('vcm@', gs.tiers$tier)) > 0) {
+    vcm.score <- as.numeric(gs.tiers %>%
+                              filter(tier == "vcm@CHI") %>%
+                              select(slice_match_n))
+    vcm.acc <- paste0("vcm: ", round(vcm.score*100, 2), "%")
+  } else {
+    vcm.acc <- "vcm: <nothing to evaluate>"
+  }
+  if (sum(grepl('lex@', gs.tiers$tier)) > 0) {
+    lex.score <- as.numeric(gs.tiers %>%
+                              filter(tier == "lex@CHI") %>%
+                              select(slice_match_n))
+    lex.acc <- paste0("lex: ", round(lex.score*100, 2), "%")
+  } else {
+    lex.acc <- "lex: <nothing to evaluate>"
+  }
+  if (sum(grepl('mwu@', gs.tiers$tier)) > 0) {
+    mwu.score <- as.numeric(gs.tiers %>%
+                              filter(tier == "mwu@CHI") %>%
+                              select(slice_match_n))
+    mwu.acc <- paste0("mwu: ", round(mwu.score*100, 2), "%")
+  } else {
+    mwu.acc <- "mwu: <nothing to evaluate>"
+  }
+  
 
   # Summary scores
   summ.bad.tiers <- ""
   summ.weighted.score <- ""
-  summ.total.subparts <- ""
   pass.message <- ""
-  subminscores <- gs.tiers %>%
-      replace_na(list(slice_match_n = 0)) %>%
-      filter(slice_match_n < min_score) %>%
-      select(tier)
-  overall.score <- round(((chi.score * 0.3) + (non.chi.score * 0.3) +
-    (non.chi.score * 0.4))*100,2)
-  subtests.passed <- sum(c(chi.score, non.chi.score, dep.score) > min_subpart)
+  subminscores.univ <- gs.tiers %>%
+    filter(tier == speaker | tier == "vcm@CHI") %>%
+    replace_na(list(slice_match_n = 0)) %>%
+    filter(slice_match_n < min_score_univ) %>%
+    select(tier)
+  subminscores.lgsp <- gs.tiers %>%
+    filter(tier != speaker & tier != "vcm@CHI") %>%
+    replace_na(list(slice_match_n = 0)) %>%
+    filter(slice_match_n < min_score_lgsp) %>%
+    select(tier)
+  subminscores <- bind_rows(subminscores.univ, subminscores.lgsp)
+  overall.score <- round((
+    (chi.score * 0.35) +
+    (non.chi.score * 0.35) +
+    (chi.dep.score * 0.15) +
+    (xds.score * 0.15))*100,2)
   if(nrow(subminscores) > 0) {
     submins <- subminscores$tier[1]
     if (nrow(subminscores) > 1) {
@@ -258,10 +327,8 @@ compare.files <- function(nw.filename, recording, minute, coder, lab) {
   } else {
     summ.bad.tiers <- "Poor-performance tiers: <none! hooray!>"
   }
-  summ.weighted.score <- paste("Weighted score: ",overall.score, sep="")
-  summ.total.subparts <- paste("Sub-parts passed: ",subtests.passed," out of 3", sep="")
-  if (subtests.passed >= min_subpart_passes &
-      overall.score >= min_overall_score &
+  summ.weighted.score <- paste("Weighted score: ", overall.score, "%", sep="")
+  if (overall.score >= min_overall_score &
       nrow(subminscores) == 0) {
     pass.message <- "Congratulations, you pass for this segment! Please pass this report on to your lab's PI."
   } else {
@@ -269,12 +336,12 @@ compare.files <- function(nw.filename, recording, minute, coder, lab) {
   }
 
   # Notes on requirements
-  req.tiers <- paste("- At least ", min_score*100,
-                     "% accuracy on ALL individual tiers", sep="")
   req.wscore <- paste("- An overall weighted score higher than ",
                       min_overall_score*100, "%", sep="")
-  req.subpts <- paste("- At least ", min_subpart*100, "% accuracy on ",
-                      min_subpart_passes, " of the 3 sub-parts", sep="")
+  req.tiers <- paste("- ", min_score_univ*100,
+                     "% accuracy on ALL speaker tiers and vcm@CHI", sep="")
+  req.tiers <- paste("- At least ", min_score_lgsp*100,
+                     "% accuracy on ALL xds tiers and lex and mwu@CHI (as applicable)", sep="")
 
   # Prep error table for return
   errors.tbl <- errors.tbl %>%
@@ -295,14 +362,12 @@ compare.files <- function(nw.filename, recording, minute, coder, lab) {
       gs.tiers.print = gs.tiers.print,
       chi.diar = chi.diar,
       nch.diar = nch.diar,
-      dep.acc = dep.acc,
+      xds.acc = xds.acc,
       summ.bad.tiers = summ.bad.tiers,
       summ.weighted.score = summ.weighted.score,
-      summ.total.subparts = summ.total.subparts,
       pass.message = pass.message,
       req.tiers = req.tiers,
       req.wscore = req.wscore,
-      req.subpts = req.subpts,
       errors.tbl = errors.tbl,
       compare.stmt = compare.stmt,
       coder.stmt = coder.stmt

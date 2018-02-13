@@ -25,14 +25,21 @@ ui <- fluidPage(
                      placeholder = 'Select a recording below',
                      onInitialize = I('function() { this.setValue(""); }'))),
 
-            # Input: Annotated minute ----
+      # Input: Annotated minute ----
       selectizeInput("minute", "Which minute do you want to test?",
                    choices = 1:5,
                    options = list(
                      placeholder = 'Select a test minute below',
                      onInitialize = I('function() { this.setValue(""); }'))),
 
-      # Input: Annotator's name ----
+      # Input: Annotated recording ----
+      selectizeInput("native", "Are you a native speaker of the language in the recording?",
+                   choices = c("Yes", "No"),
+                   options = list(
+                     placeholder = 'Select an option below',
+                     onInitialize = I('function() { this.setValue(""); }'))),
+
+            # Input: Annotator's name ----
       textInput("coder", "Annotator name",
                 placeholder = "your first and last name"),
 
@@ -59,6 +66,7 @@ server <- function(input, output) {
         input$coder, input$PI)
     compare.files(input$file1$datapath,
                   input$recording,
+                  input$native,
                   as.numeric(input$minute),
                   input$coder,
                   input$PI)
@@ -81,19 +89,16 @@ server <- function(input, output) {
       tags$h1("Accuracy reports"),
       tags$div("Your accuracy for the test minute is as follows (limited to GS-matching tiers):"),
       renderTable(report()$gs.tiers.print),
-      tags$div("Your three sub-part scores are as follows:"),
-      renderText(as.character(report()$chi.diar)),
+      tags$div("Your weighted scores for non-CHI diarization and xds are as follows:"),
       renderText(as.character(report()$nch.diar)),
-      renderText(as.character(report()$dep.acc)),
+      renderText(as.character(report()$xds.acc)),
       tags$h1("Summary"),
-      renderText(as.character(report()$summ.bad.tiers)),
       renderText(as.character(report()$summ.weighted.score)),
-      renderText(as.character(report()$summ.total.subparts)),
+      renderText(as.character(report()$summ.bad.tiers)),
       tags$h4(renderText(as.character(report()$pass.message))),
       tags$div("To pass you needed:"),
-      renderText(as.character(report()$req.tiers)),
       renderText(as.character(report()$req.wscore)),
-      renderText(as.character(report()$req.subpts)),
+      renderText(as.character(report()$req.tiers)),
       tags$br()
     )
   })
