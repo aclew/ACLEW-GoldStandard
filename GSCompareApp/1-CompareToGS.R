@@ -295,7 +295,6 @@ compare.files <- function(nw.filename, recording, native, minute, coder, lab) {
     mwu.acc <- "mwu: <nothing to evaluate>"
   }
   
-
   # Summary scores
   summ.bad.tiers <- ""
   summ.weighted.score <- ""
@@ -338,9 +337,9 @@ compare.files <- function(nw.filename, recording, native, minute, coder, lab) {
   # Notes on requirements
   req.wscore <- paste("- An overall weighted score higher than ",
                       min_overall_score*100, "%", sep="")
-  req.tiers <- paste("- ", min_score_univ*100,
+  req.tiers.univ <- paste("- At least ", min_score_univ*100,
                      "% accuracy on ALL speaker tiers and vcm@CHI", sep="")
-  req.tiers <- paste("- At least ", min_score_lgsp*100,
+  req.tiers.lgsp <- paste("- At least ", min_score_lgsp*100,
                      "% accuracy on ALL xds tiers and lex and mwu@CHI (as applicable)", sep="")
 
   # Prep error table for return
@@ -366,8 +365,9 @@ compare.files <- function(nw.filename, recording, native, minute, coder, lab) {
       summ.bad.tiers = summ.bad.tiers,
       summ.weighted.score = summ.weighted.score,
       pass.message = pass.message,
-      req.tiers = req.tiers,
       req.wscore = req.wscore,
+      req.tiers.univ = req.tiers.univ,
+      req.tiers.lgsp = req.tiers.lgsp,
       errors.tbl = errors.tbl,
       compare.stmt = compare.stmt,
       coder.stmt = coder.stmt

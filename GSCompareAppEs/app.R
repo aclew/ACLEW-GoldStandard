@@ -32,7 +32,14 @@ ui <- fluidPage(
                      placeholder = 'Seleccioná tu minuto evaluado',
                      onInitialize = I('function() { this.setValue(""); }'))),
 
-      # Input: Annotator's name ----
+      # Input: Annotated recording ----
+      selectizeInput("native", "¿Eres un hablante nativo de la idioma en la grabación?",
+                   choices = c("Sí", "No"),
+                   options = list(
+                     placeholder = 'Seleccioná una opción',
+                     onInitialize = I('function() { this.setValue(""); }'))),
+
+            # Input: Annotator's name ----
       textInput("coder", "Nombre del anotador",
                 placeholder = "Tu nombre y apellido"),
 
@@ -59,6 +66,7 @@ server <- function(input, output) {
         input$coder, input$PI)
     compare.files(input$file1$datapath,
                   input$recording,
+                  input$native,
                   as.numeric(input$minute),
                   input$coder,
                   input$PI)
@@ -66,8 +74,8 @@ server <- function(input, output) {
 
   output$report <- renderUI({
     req(report())
-    
-    tagList(
+
+  tagList(
       tags$div(as.character(report()$compare.stmt),
                tags$br(),
                as.character(report()$coder.stmt),
@@ -81,19 +89,17 @@ server <- function(input, output) {
       tags$h1("Precisión"),
       tags$div("Tu precisión para el minuto evaluado (limitado a líneas apareadas con las del GS):"),
       renderTable(report()$gs.tiers.print),
-      tags$div("Tus puntajes para las tres subpartes son:"),
-      renderText(as.character(report()$chi.diar)),
+      tags$div("Tus puntajes ponderados para non-CHI diarización y xds son:"),
       renderText(as.character(report()$nch.diar)),
-      renderText(as.character(report()$dep.acc)),
+      renderText(as.character(report()$xds.acc)),
       tags$h1("Resumen"),
-      renderText(as.character(report()$summ.bad.tiers)),
       renderText(as.character(report()$summ.weighted.score)),
-      renderText(as.character(report()$summ.total.subparts)),
+      renderText(as.character(report()$summ.bad.tiers)),
       tags$h4(renderText(as.character(report()$pass.message))),
       tags$div("Para aprobar la prueba necesitas:"),
-      renderText(as.character(report()$req.tiers)),
       renderText(as.character(report()$req.wscore)),
-      renderText(as.character(report()$req.subpts)),
+      renderText(as.character(report()$req.tiers.univ)),
+      renderText(as.character(report()$req.tiers.lgsp)),
       tags$br()
     )
   })

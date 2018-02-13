@@ -98,7 +98,8 @@ server <- function(input, output) {
       tags$h4(renderText(as.character(report()$pass.message))),
       tags$div("To pass you needed:"),
       renderText(as.character(report()$req.wscore)),
-      renderText(as.character(report()$req.tiers)),
+      renderText(as.character(report()$req.tiers.univ)),
+      renderText(as.character(report()$req.tiers.lgsp)),
       tags$br()
     )
   })
