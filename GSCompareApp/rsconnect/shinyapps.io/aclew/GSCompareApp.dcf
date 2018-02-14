@@ -5,9 +5,9 @@ account: aclew
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 257315
-bundleId: 1220939
+bundleId: 1223147
 url: https://aclew.shinyapps.io/GSCompareApp/
-when: 1518526672.15861
+when: 1518630762.0878
 asMultiple: FALSE
 asStatic: FALSE
-ignoredFiles: 5959-MC.txt
+ignoredFiles: 5959-MC.txt|VanDamFJ11-GS_Training_Round_3-JK.txt|VanDamFJ11-GS_Training_Round_3-Test.txt
