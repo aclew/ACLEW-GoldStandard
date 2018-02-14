@@ -356,9 +356,9 @@ compare.files <- function(nw.filename, recording, native, minute, coder, lab) {
                       min_overall_score*100, "%", sep="")
   req.tiers.univ <- paste("- Al menos ", min_score_univ*100,
                      "% de precisión en TODAS las líneas de hablantes y vcm@CHI", sep="")
-  if (native == "Yes") {
+  if (native == "Sí") {
     req.tiers.lgsp <- paste("- Al menos ", min_score_lgsp*100,
-                     "% de precisión en TODAS las líneas de xds, lex@CHI y mwu@CHI (cuando sea necesario).", sep="")
+                     "% de precisión en TODAS las líneas de xds, lex@CHI y mwu@CHI (como sea necesario).", sep="")
   } else {
     req.tiers.lgsp <- paste("- Al menos ", min_score_lgsp*100,
                      "% de precisión en TODAS las líneas de xds.", sep="")
