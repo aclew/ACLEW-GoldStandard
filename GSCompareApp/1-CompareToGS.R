@@ -304,17 +304,29 @@ compare.files <- function(nw.filename, recording, native, minute, coder, lab) {
     replace_na(list(slice_match_n = 0)) %>%
     filter(slice_match_n < min_score_univ) %>%
     select(tier)
-  subminscores.lgsp <- gs.tiers %>%
-    filter(tier != speaker & tier != "vcm@CHI") %>%
-    replace_na(list(slice_match_n = 0)) %>%
-    filter(slice_match_n < min_score_lgsp) %>%
-    select(tier)
+  if (native == "Yes") {
+    subminscores.lgsp <- gs.tiers %>%
+      filter(tier != speaker & tier != "vcm@CHI") %>%
+      replace_na(list(slice_match_n = 0)) %>%
+      filter(slice_match_n < min_score_lgsp) %>%
+      select(tier)
+    overall.score <- round((
+      (chi.score * 0.35) +
+      (non.chi.score * 0.35) +
+      (chi.dep.score * 0.15) +
+      (xds.score * 0.15))*100,2)
+  } else {
+    subminscores.lgsp <- gs.tiers %>%
+      filter(grepl('xds@', tier)) %>%
+      replace_na(list(slice_match_n = 0)) %>%
+      filter(slice_match_n < min_score_lgsp) %>%
+      select(tier)
+    overall.score <- round((
+      (chi.score * 0.4) +
+      (non.chi.score * 0.34) +
+      (xds.score * 0.2))*100,2)
+  }
   subminscores <- bind_rows(subminscores.univ, subminscores.lgsp)
-  overall.score <- round((
-    (chi.score * 0.35) +
-    (non.chi.score * 0.35) +
-    (chi.dep.score * 0.15) +
-    (xds.score * 0.15))*100,2)
   if(nrow(subminscores) > 0) {
     submins <- subminscores$tier[1]
     if (nrow(subminscores) > 1) {
@@ -339,8 +351,13 @@ compare.files <- function(nw.filename, recording, native, minute, coder, lab) {
                       min_overall_score*100, "%", sep="")
   req.tiers.univ <- paste("- At least ", min_score_univ*100,
                      "% accuracy on ALL speaker tiers and vcm@CHI", sep="")
-  req.tiers.lgsp <- paste("- At least ", min_score_lgsp*100,
-                     "% accuracy on ALL xds tiers and lex and mwu@CHI (as applicable)", sep="")
+  if (native == "Yes") {
+    req.tiers.lgsp <- paste("- At least ", min_score_lgsp*100,
+                       "% accuracy on ALL xds tiers, lex@CHI, and mwu@CHI (as applicable).", sep="")
+  } else {
+    req.tiers.lgsp <- paste("- At least ", min_score_lgsp*100,
+                       "% accuracy on ALL xds tiers.", sep="")
+  }
 
   # Prep error table for return
   errors.tbl <- errors.tbl %>%
