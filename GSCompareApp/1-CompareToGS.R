@@ -105,17 +105,20 @@ compare.files <- function(nw.filename, recording, native, minute, coder, lab) {
     }
 
     # Internally rename in nw.speakers/remove non-matched tiers
-    nw.file.temp <- nw.file %>% filter(speaker %in%
-                                         tier.equiv.temp$your.spkr)
+    # Careful not to overwrite names/collapse speakers in the process!
+    nw.file.temp <- nw.file %>%
+      filter(speaker %in% tier.equiv.temp$your.spkr) %>%
+      mutate(speaker2 = speaker)
     for (row in 1:nrow(tier.equiv.temp)) {
       if (tier.equiv.temp$gs.spkr[row] != tier.equiv.temp$your.spkr[row]) {
-        nw.file.temp <- nw.file.temp %>% mutate(
-          speaker = gsub(tier.equiv.temp$your.spkr[row],
-                         tier.equiv.temp$gs.spkr[row], speaker),
-          tier = gsub(tier.equiv.temp$your.spkr[row],
-                      tier.equiv.temp$gs.spkr[row], tier))
+        toChange <- which(nw.file.temp$speaker2 ==
+                            tier.equiv.temp$your.spkr[row])
+        nw.file.temp$speaker[toChange] <- tier.equiv.temp$gs.spkr[row]
+        nw.file.temp$tier[toChange] <- gsub(tier.equiv.temp$your.spkr[row],
+                         tier.equiv.temp$gs.spkr[row], nw.file.temp$tier[toChange])
       }
     }
+    nw.file.temp$speaker2 <- NULL
     
     # Set up table for tier comparison and error-reporting
     errors.tbl.temp <- tibble()
