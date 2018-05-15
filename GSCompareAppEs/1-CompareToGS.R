@@ -235,12 +235,13 @@ compare.files <- function(nw.filename, recording, native, minute, coder, lab) {
   vcm.acc <- ""
   lex.acc <- ""
   mwu.acc <- ""
-  if (nrow(filter(gs.tiers, tier == "CHI") > 0)) {
+  if (nrow(filter(gs.tiers, tier == "CHI")) > 0) {
     chi.score <- as.numeric(gs.tiers %>% filter(tier == "CHI") %>%
                               select(slice_match_n) %>%
                               replace_na(list(slice_match_n = 0)))
     chi.diar <- paste("CHI diarización: ", round(chi.score*100, 2),"%", sep="")
   } else {
+    chi.score <- 1
     chi.diar <- "CHI diarización: <nada de verificar>"
   }
   if (nrow(filter(gs.tiers, tier != "CHI")) > 0) {
@@ -252,6 +253,7 @@ compare.files <- function(nw.filename, recording, native, minute, coder, lab) {
     nch.diar <- paste("No-CHI diarización: ", round(non.chi.score*100, 2),"%",
                    sep="")
   } else {
+    non.chi.score <- 1
     nch.diar <- "Non-CHI diarización: <nada de verificar>"
   }
   if (sum(grepl('xds@', gs.tiers$tier)) > 0) {
@@ -262,6 +264,7 @@ compare.files <- function(nw.filename, recording, native, minute, coder, lab) {
                               summarise(sum(wgtd.tier.score)))
     xds.acc <- paste("Media de xds: ", round(xds.score*100, 2),"%", sep="")
   } else {
+    xds.score <- 
     xds.acc <- "Media de xds: <nada de verificar>"
   }
   if (sum(grepl('@CHI', gs.tiers$tier)) > 0) {
@@ -271,6 +274,7 @@ compare.files <- function(nw.filename, recording, native, minute, coder, lab) {
                               summarise(mean(slice_match_n)))
     chi.dep.acc <- paste0("CHI vcm/lex/mwu: ", round(chi.dep.score*100, 2), "%")
   } else {
+    chi.dep.score <- 1
     chi.dep.acc <- "CHI vcm/lex/mwu: <nada de verificar>"
   }
   if (sum(grepl('vcm@', gs.tiers$tier)) > 0) {
@@ -279,6 +283,7 @@ compare.files <- function(nw.filename, recording, native, minute, coder, lab) {
                               select(slice_match_n))
     vcm.acc <- paste0("vcm: ", round(vcm.score*100, 2), "%")
   } else {
+    vcm.score <- 1
     vcm.acc <- "vcm: <nada de verificar>"
   }
   if (sum(grepl('lex@', gs.tiers$tier)) > 0) {
@@ -287,6 +292,7 @@ compare.files <- function(nw.filename, recording, native, minute, coder, lab) {
                               select(slice_match_n))
     lex.acc <- paste0("lex: ", round(lex.score*100, 2), "%")
   } else {
+    lex.score <- 1
     lex.acc <- "lex: <nada de verificar>"
   }
   if (sum(grepl('mwu@', gs.tiers$tier)) > 0) {
@@ -295,6 +301,7 @@ compare.files <- function(nw.filename, recording, native, minute, coder, lab) {
                               select(slice_match_n))
     mwu.acc <- paste0("mwu: ", round(mwu.score*100, 2), "%")
   } else {
+    mwu.score <- 1
     mwu.acc <- "mwu: <nada de verificar>"
   }
 
