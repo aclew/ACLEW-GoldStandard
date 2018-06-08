@@ -59,6 +59,7 @@ compare.files <- function(nw.filename, recording, native, minute, coder, lab) {
   select(tier, speaker) %>% distinct() %>% arrange(speaker) %>%
   mutate(slice_match = "", n_annots = "", sec_annots = "",
          slice_match_n = 0, nsec_spch = 0)
+  errors.tbl <- tibble()
 
   # CHI is always matched with CHI
   tier.equiv$your.spkr[which(tier.equiv$gs.spkr == "CHI")] <- "CHI"
@@ -66,62 +67,74 @@ compare.files <- function(nw.filename, recording, native, minute, coder, lab) {
   # The others are matched as a set...
   nonchi.gs.s <- subset(gs.speakers, speaker != "CHI")$speaker
   nonchi.nw.s <- subset(nw.speakers, speaker != "CHI")$speaker
-  gs.tier.perms <- permutations(n=length(nonchi.gs.s), r=length(nonchi.gs.s),
-               v=nonchi.gs.s,repeats.allowed=F)
-  # For each permutation of the non-CHI speakers in the GS,
-  # find the best set of non-CHI speakers in the coder's file
-  top.score <- 0
-  for (perm in 1:nrow(gs.tier.perms)) {
-    tier.equiv.temp <- tibble(
-      gs.spkr = gs.speakers$speaker,
-      your.spkr = ""
-    )
-    tier.equiv.temp$your.spkr[which(
-      tier.equiv.temp$gs.spkr == "CHI")] <- "CHI"
-    nonchi.gs.s.p <- gs.tier.perms[perm,]
-    nonchi.nw.s.p <- nonchi.nw.s
-    while (length(nonchi.gs.s.p) > 0) {
-      gs.tier.tomatch <- nonchi.gs.s.p[1]
-      nonchi.gs.s.p <- nonchi.gs.s.p[!nonchi.gs.s.p %in% gs.tier.tomatch]
-      # Find the slice_match value between the chosen GS tier and every NW option
-      nonchi.nw.s.p <- sample(nonchi.nw.s.p) # randomize the NW tiers
-      best.nw.match <- "<no match>"
-      best.slice.score <- 0
-      if (length(nonchi.nw.s.p) > 0) {
-        for (tier.opt in nonchi.nw.s.p) {
+  
+  # For files with a lot of tiers to match, it is computationally
+  # infeasible to try every matching permutation, so we go for a 
+  # more efficient method
+  if (length(nonchi.gs.s) > 5) {
+    # Start with the coder's most speech-heavy tier and assign it to the GS tier
+    # it matches best, then remove those tiers and repeat with the remaining tiers
+    # until there are no more coder tiers/GS tiers to pair up
+    nchi.spk.summ <- nw.file %>%
+      filter(!(grepl('@', tier)) & speaker != "CHI") %>%
+      filter(start < seg_end & stop > seg_stt)
+    clipped.ends <- which(nchi.spk.summ$stop > seg_end)
+    clipped.starts <- which(nchi.spk.summ$start < seg_stt)
+    if (length(clipped.ends) > 0) {
+      for (idx in clipped.ends) {
+        nchi.spk.summ$stop[idx] <- seg_end
+        nchi.spk.summ$duration[idx] <- seg_end - nchi.spk.summ$start[idx]
+      }
+    }
+    if (length(clipped.starts) > 0) {
+      for (idx in clipped.starts) {
+        nchi.spk.summ$start[idx] <- seg_stt # not strictly necessary, but good for sanity checking
+        nchi.spk.summ$duration[idx] <- nchi.spk.summ$stop - seg_stt[idx]
+      }
+    }
+    nchi.spk.tots <- nchi.spk.summ %>%
+      group_by(tier) %>%
+      summarise(tot.ms = sum(duration)) %>%
+      arrange(-tot.ms)
+    nw.tiers <- nchi.spk.tots$tier
+    for (nw.tier in nw.tiers) {
+      avail.gs.tiers <- tier.equiv$gs.spkr[which(tier.equiv$your.spkr == "")]
+      if (length(avail.gs.tiers > 0)) {
+        top.score <- 0
+        top.tier <- ""
+        for (gs.tier in avail.gs.tiers) {
           match.mean <- mean(intersect.spk.tiers(gs.file, nw.file,
-                                                 gs.tier.tomatch, tier.opt,
+                                                 gs.tier, nw.tier,
                                                  seg_stt, seg_end,
-                                                 strict, slice_sz)$match)
-          if (match.mean > best.slice.score) {
-            best.slice.score <- match.mean
-            best.nw.match <- tier.opt
+                                                 strict, slice_sz)$match)    
+          if (match.mean > top.score) {
+            top.score <- match.mean
+            top.tier <- gs.tier
           }
         }
+        tier.equiv$your.spkr[which(tier.equiv$gs.spkr == top.tier)] <- nw.tier
       }
-      tier.equiv.temp$your.spkr[which(
-        tier.equiv.temp$gs.spkr == gs.tier.tomatch)] <- best.nw.match
-      nonchi.nw.s.p <- nonchi.nw.s.p[!nonchi.nw.s.p %in% best.nw.match]
     }
-
+    tier.equiv$your.spkr[which(tier.equiv$your.spkr == "")] <- "<no match>"
+    
     # Internally rename in nw.speakers/remove non-matched tiers
     # Careful not to overwrite names/collapse speakers in the process!
     nw.file.temp <- nw.file %>%
-      filter(speaker %in% tier.equiv.temp$your.spkr) %>%
+      filter(speaker %in% tier.equiv$your.spkr) %>%
       mutate(speaker2 = speaker)
-    for (row in 1:nrow(tier.equiv.temp)) {
-      if (tier.equiv.temp$gs.spkr[row] != tier.equiv.temp$your.spkr[row]) {
+    for (row in 1:nrow(tier.equiv)) {
+      if (tier.equiv$gs.spkr[row] != tier.equiv$your.spkr[row]) {
         toChange <- which(nw.file.temp$speaker2 ==
-                            tier.equiv.temp$your.spkr[row])
-        nw.file.temp$speaker[toChange] <- tier.equiv.temp$gs.spkr[row]
-        nw.file.temp$tier[toChange] <- gsub(tier.equiv.temp$your.spkr[row],
-                         tier.equiv.temp$gs.spkr[row], nw.file.temp$tier[toChange])
+                            tier.equiv$your.spkr[row])
+        nw.file.temp$speaker[toChange] <- tier.equiv$gs.spkr[row]
+        nw.file.temp$tier[toChange] <- gsub(tier.equiv$your.spkr[row],
+                         tier.equiv$gs.spkr[row], nw.file.temp$tier[toChange])
       }
     }
     nw.file.temp$speaker2 <- NULL
     
     # Set up table for tier comparison and error-reporting
-    errors.tbl.temp <- tibble()
+    errors.tbl.temp <- errors.tbl
     gs.tiers.temp <- gs.file %>%
       filter(stop > seg_stt & start < seg_end & (!is.na(speaker))) %>%
       select(tier, speaker) %>% distinct() %>% arrange(speaker) %>%
@@ -135,8 +148,8 @@ compare.files <- function(nw.filename, recording, native, minute, coder, lab) {
         tierspkr <- substr(tiertype, 5, 7)
       }
       gs.row <- which(gs.tiers.temp$tier == tiertype)
-      if (tier.equiv.temp$your.spkr[which(
-        tier.equiv.temp$gs.spkr == tierspkr)] == "<no match>") {
+      if (tier.equiv$your.spkr[which(
+        tier.equiv$gs.spkr == tierspkr)] == "<no match>") {
         if (!(grepl("@", tiertype))) {
           gs.tiers.temp$n_annots[gs.row] <- "MISSING"
           gs.tiers.temp$sec_annots[gs.row] <- "MISSING"
@@ -179,11 +192,129 @@ compare.files <- function(nw.filename, recording, native, minute, coder, lab) {
         }
       }
     }
-    if (mean(gs.tiers.temp$slice_match_n) > top.score) {
-      tier.equiv <- tier.equiv.temp
-      gs.tiers <- gs.tiers.temp
-      errors.tbl <- errors.tbl.temp
-      top.score <- mean(gs.tiers.temp$slice_match_n)
+    gs.tiers <- gs.tiers.temp
+    errors.tbl <- errors.tbl.temp
+  } else { # When there are 5 or fewer non-CHI tiers in the GS file, try every
+           # permutation of tier matches to give the coder the best chance of passing
+    gs.tier.perms <- permutations(n=length(nonchi.gs.s), r=length(nonchi.gs.s),
+                 v=nonchi.gs.s,repeats.allowed=F)
+    # For each permutation of the non-CHI speakers in the GS,
+    # find the best set of non-CHI speakers in the coder's file
+    top.score <- 0
+    for (perm in 1:nrow(gs.tier.perms)) {
+      tier.equiv.temp <- tibble(
+        gs.spkr = gs.speakers$speaker,
+        your.spkr = ""
+      )
+      tier.equiv.temp$your.spkr[which(
+        tier.equiv.temp$gs.spkr == "CHI")] <- "CHI"
+      nonchi.gs.s.p <- gs.tier.perms[perm,]
+      nonchi.nw.s.p <- nonchi.nw.s
+      while (length(nonchi.gs.s.p) > 0) {
+        gs.tier.tomatch <- nonchi.gs.s.p[1]
+        nonchi.gs.s.p <- nonchi.gs.s.p[!nonchi.gs.s.p %in% gs.tier.tomatch]
+        # Find the slice_match value between the chosen GS tier and every NW option
+        nonchi.nw.s.p <- sample(nonchi.nw.s.p) # randomize the NW tiers
+        best.nw.match <- "<no match>"
+        best.slice.score <- 0
+        if (length(nonchi.nw.s.p) > 0) {
+          for (tier.opt in nonchi.nw.s.p) {
+            match.mean <- mean(intersect.spk.tiers(gs.file, nw.file,
+                                                   gs.tier.tomatch, tier.opt,
+                                                   seg_stt, seg_end,
+                                                   strict, slice_sz)$match)
+            if (match.mean > best.slice.score) {
+              best.slice.score <- match.mean
+              best.nw.match <- tier.opt
+            }
+          }
+        }
+        tier.equiv.temp$your.spkr[which(
+          tier.equiv.temp$gs.spkr == gs.tier.tomatch)] <- best.nw.match
+        nonchi.nw.s.p <- nonchi.nw.s.p[!nonchi.nw.s.p %in% best.nw.match]
+      }
+  
+      # Internally rename in nw.speakers/remove non-matched tiers
+      # Careful not to overwrite names/collapse speakers in the process!
+      nw.file.temp <- nw.file %>%
+        filter(speaker %in% tier.equiv.temp$your.spkr) %>%
+        mutate(speaker2 = speaker)
+      for (row in 1:nrow(tier.equiv.temp)) {
+        if (tier.equiv.temp$gs.spkr[row] != tier.equiv.temp$your.spkr[row]) {
+          toChange <- which(nw.file.temp$speaker2 ==
+                              tier.equiv.temp$your.spkr[row])
+          nw.file.temp$speaker[toChange] <- tier.equiv.temp$gs.spkr[row]
+          nw.file.temp$tier[toChange] <- gsub(tier.equiv.temp$your.spkr[row],
+                           tier.equiv.temp$gs.spkr[row], nw.file.temp$tier[toChange])
+        }
+      }
+      nw.file.temp$speaker2 <- NULL
+      
+      # Set up table for tier comparison and error-reporting
+      errors.tbl.temp <- tibble()
+      gs.tiers.temp <- gs.file %>%
+        filter(stop > seg_stt & start < seg_end & (!is.na(speaker))) %>%
+        select(tier, speaker) %>% distinct() %>% arrange(speaker) %>%
+        mutate(slice_match = "", n_annots = "", sec_annots = "",
+               slice_match_n = 0, nsec_spch = 0)
+      
+      # Fill in report values
+      for (tiertype in gs.tiers.temp$tier) {
+        tierspkr <- tiertype
+        if ((grepl("@", tiertype))) {
+          tierspkr <- substr(tiertype, 5, 7)
+        }
+        gs.row <- which(gs.tiers.temp$tier == tiertype)
+        if (tier.equiv.temp$your.spkr[which(
+          tier.equiv.temp$gs.spkr == tierspkr)] == "<no match>") {
+          if (!(grepl("@", tiertype))) {
+            gs.tiers.temp$n_annots[gs.row] <- "MISSING"
+            gs.tiers.temp$sec_annots[gs.row] <- "MISSING"
+          }
+          gs.tiers.temp$slice_match[gs.row] <- "0%"
+          gs.tiers.temp$slice_match_n[gs.row] <- 0
+          gs.tiers.temp$nsec_spch[gs.row] <- round(sum(segA$duration)/1000,2)
+        } else {
+          # Fill in n_annots and sec_annots values
+          segA <- gs.file %>%
+            filter(tier == tiertype & stop > seg_stt & start < seg_end) %>%
+            mutate(coder = "A")
+          segB <- nw.file.temp %>%
+            filter(tier == tiertype & stop > seg_stt & start < seg_end) %>%
+            mutate(coder = "B")
+          if (!(grepl("@", tiertype))) {
+            gs.tiers.temp$n_annots[gs.row] <-
+              paste("∆ = ",(nrow(segB)-nrow(segA)),
+                  " (GS:",nrow(segA),", You:",nrow(segB),")", sep="")
+            gs.tiers.temp$sec_annots[gs.row] <-
+              paste("∆ = ",round((sum(segB$duration)/1000-sum(segA$duration)/1000),2),
+                  " (GS:",round(sum(segA$duration)/1000,2),", You:",
+                  round(sum(segB$duration)/1000,2),")", sep="")
+          }
+          gs.tiers.temp$nsec_spch[gs.row] <- round(sum(segA$duration)/1000,2)
+          # Fill in the slice_match value
+          comparison.tbl <- intersect.tiers(gs.file, nw.file.temp,
+                                            tiertype, seg_stt, seg_end, strict, slice_sz)
+          if (nrow(comparison.tbl) == 0) {
+            gs.tiers.temp$slice_match[gs.row] <- "0%"
+            gs.tiers.temp$slice_match_n[gs.row] <- 0
+          } else {
+            gs.tiers.temp$slice_match[gs.row] <-
+              paste(round(mean(comparison.tbl$match)*100, 2),"%", sep="")
+            gs.tiers.temp$slice_match_n[gs.row] <- mean(comparison.tbl$match)
+            # Add slice match errors to the reporting table
+            errors.tbl.temp <- bind_rows(errors.tbl.temp,
+                                    lapply(subset(comparison.tbl, match == 0),
+                                           as.character))
+          }
+        }
+      }
+      if (mean(gs.tiers.temp$slice_match_n) > top.score) {
+        tier.equiv <- tier.equiv.temp
+        gs.tiers <- gs.tiers.temp
+        errors.tbl <- errors.tbl.temp
+        top.score <- mean(gs.tiers.temp$slice_match_n)
+      }
     }
   }
   
@@ -216,7 +347,7 @@ compare.files <- function(nw.filename, recording, native, minute, coder, lab) {
   gs.tiers$weight[which(gs.tiers$tier == "CHI")] <- 1
   nonCHI.spch.rows <- which(!(grepl('@|CHI', gs.tiers$tier)))
   gs.tiers$weight[nonCHI.spch.rows] <- round(gs.tiers$nsec_spch[nonCHI.spch.rows]/
-    sum(gs.tiers$nsec_spch[nonCHI.spch.rows]),2)
+    sum(gs.tiers$nsec_spch[nonCHI.spch.rows]),5)
   xds.rows <- which((grepl('xds@', gs.tiers$tier)))
   gs.tiers$weight[xds.rows] <- gs.tiers$weight[xds.rows-1]
   chi.dep.rows <- which((grepl('@CHI', gs.tiers$tier)))
