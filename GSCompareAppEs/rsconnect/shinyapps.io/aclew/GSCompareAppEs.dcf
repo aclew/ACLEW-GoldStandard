@@ -5,8 +5,9 @@ account: aclew
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 257341
-bundleId: 1375134
+bundleId: 1418822
 url: https://aclew.shinyapps.io/GSCompareAppEs/
-when: 1526399444.7148
+when: 1528462539.52067
 asMultiple: FALSE
 asStatic: FALSE
+ignoredFiles: 9909-0GS0-test.txt|9909-0GS0-test2.txt

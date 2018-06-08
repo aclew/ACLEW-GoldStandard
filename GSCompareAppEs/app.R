@@ -20,7 +20,7 @@ ui <- fluidPage(
 
       # Input: Annotated recording ----
       selectizeInput("recording", "¿Qué grabación anotaste?",
-                   choices = c("2337", "5271", "5959", "VanFJ11"),
+                   choices = c("2337", "5271", "5959", "9909", "VanFJ11"),
                    options = list(
                      placeholder = 'Seleccioná una grabación',
                      onInitialize = I('function() { this.setValue(""); }'))),
