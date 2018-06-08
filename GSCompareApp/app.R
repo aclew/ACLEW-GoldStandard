@@ -39,7 +39,14 @@ ui <- fluidPage(
                      placeholder = 'Select an option below',
                      onInitialize = I('function() { this.setValue(""); }'))),
 
-            # Input: Annotator's name ----
+      # Input: Last chance ----
+      selectizeInput("evaltype", "What type of test do you want to conduct on your file?",
+                   choices = c("Normal", "Last-chance"),
+                   options = list(
+                     placeholder = 'Select an option below',
+                     onInitialize = I('function() { this.setValue(""); }'))),
+
+      # Input: Annotator's name ----
       textInput("coder", "Annotator name",
                 placeholder = "your first and last name"),
 
@@ -68,6 +75,7 @@ server <- function(input, output) {
                   input$recording,
                   input$native,
                   as.numeric(input$minute),
+                  input$evaltype,
                   input$coder,
                   input$PI)
   })

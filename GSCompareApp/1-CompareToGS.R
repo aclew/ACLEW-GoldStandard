@@ -2,7 +2,8 @@ library(tidyverse)
 library(gtools)
 source("0-Helper_CompareToGS.R")
 
-compare.files <- function(nw.filename, recording, native, minute, coder, lab) {
+compare.files <- function(nw.filename, recording, native,
+                          minute, evaltype, coder, lab) {
   ################################################################################
   # Set up
   ################################################################################
@@ -13,23 +14,37 @@ compare.files <- function(nw.filename, recording, native, minute, coder, lab) {
   gs.file <- read.annot(paste0(recording, "-0GS0.txt"))
   ntvness <- ifelse(native == "Yes", "native", "NON-native")
   
+  if (strict == 1) {
   compare.stmt <- paste0("Comparing minute ", minute, " of recording ",
                         recording, " to the gold standard.")
+  } else {
+  compare.stmt <- paste0("Comparing minute ", minute, " of recording ",
+                        recording, " to the gold standard using LAST-CHANCE mode.")
+  }
   coder.stmt <- paste0("Submitted by coder ", coder, " from the ", lab,
                        " lab, who is a ", ntvness,
                        " speaker of the language in the recording.")
   
   # Input arguments
   slice_sz <- 50 # size of time slices compared
-  strict <- "yes" # # Possibly TO-DO for later: we could use this to test 
-                  # different equivalencies (e.g., if we want softer constraints,
-                  # like 'B' can count as 'A' or 'C')
-  min_overall_score <- 0.95 # minimum overall weighted score
-  min_score_univ <- 0.85 # minumum score allowed on diarization and vcm
-  if (native == "Yes") {
-    min_score_lgsp <- 0.85 # minumum score allowed on lex, mwu, and xds
+  strict <- ifelse(evaltype == "Normal", 1, 0)
+  
+  if (strict == 1) {
+    min_overall_score <- 0.95 # minimum overall weighted score
+    min_score_univ <- 0.85 # minumum score allowed on diarization and vcm
+    if (native == "Yes") {
+      min_score_lgsp <- 0.85 # minumum score allowed on lex, mwu, and xds
+    } else {
+      min_score_lgsp <- 0.75 # minumum score allowed on lex, mwu, and xds
+    }
   } else {
-    min_score_lgsp <- 0.75 # minumum score allowed on lex, mwu, and xds
+    min_overall_score <- 0.8 # minimum overall weighted score
+    min_score_univ <- 0.8 # minumum score allowed on diarization and vcm
+    if (native == "Yes") {
+      min_score_lgsp <- 0.85 # minumum score allowed on lex, mwu, and xds
+    } else {
+      min_score_lgsp <- 0.75 # minumum score allowed on lex, mwu, and xds
+    }
   }
   
 
