@@ -45,7 +45,7 @@ intersect.spk.tiers <- function(annA, annB, tierA, tierB,
 
 
 intersect.tiers <- function(annA, annB, tiertype,
-                            seg_stt, seg_end, strict="yes", slice_sz) {
+                            seg_stt, seg_end, strict, slice_sz) {
   if (grepl("@", tiertype)) {
     spkr <- substr(tiertype, 5, 7)
     ttyp <- substr(tiertype, 1, 3)
@@ -113,10 +113,41 @@ intersect.tiers <- function(annA, annB, tiertype,
         }
       }
     }
-    ABtbl <- ABtbl %>%
-      filter(spchA == 1 & spchB == 1) %>%
-      mutate(match = as.numeric(valA == valB), tier = tiertype) %>%
-      select(-spchA, -spchB)
+    if (strict == 1) {
+      ABtbl <- ABtbl %>%
+        filter(spchA == 1 & spchB == 1) %>%
+        mutate(match = as.numeric(valA == valB), tier = tiertype) %>%
+        select(-spchA, -spchB)
+    } else {
+      ABtbl <- ABtbl %>%
+        filter(spchA == 1 & spchB == 1)
+      if (ttyp == "xds") {
+        xds.loose.matches <- tibble(
+          GS = c('C', 'C', 'B', 'B', 'B', 'A', 'A', 'P', 'P', 'P', 'O', 'O', 'O', 'U', 'O', 'U'),
+          NW = c('C', 'B', 'B', 'C', 'A', 'A', 'B', 'P', 'O', 'U', 'O', 'P', 'U', 'P', 'O', 'U')
+        )
+        ABtbl$match <- ifelse(paste0(ABtbl$valA, ABtbl$valA) %in%
+                                paste0(xds.loose.matches$GS, xds.loose.matches$NW), 1, 0)
+        ABtbl <- filter(ABtbl, valA != 'U') %>%
+          mutate(tier = tiertype) %>%
+          select(-spchA, -spchB)
+      } else if (ttyp == "vcm") {
+        vcm.loose.matches <- tibble(
+          GS = c('N', 'N', 'C', 'C', 'L', 'L', 'Y', 'Y', 'U'),
+          NW = c('N', 'C', 'C', 'N', 'L', 'Y', 'Y', 'L', 'U')
+        )
+        ABtbl$match <- ifelse(paste0(ABtbl$valA, ABtbl$valA) %in%
+                                paste0(vcm.loose.matches$GS, vcm.loose.matches$NW), 1, 0)
+        ABtbl <- filter(ABtbl, valA != 'U') %>%
+          mutate(tier = tiertype) %>%
+          select(-spchA, -spchB)
+      } else {
+        ABtbl <- ABtbl %>%
+          filter(spchA == 1 & spchB == 1) %>%
+          mutate(match = as.numeric(valA == valB), tier = tiertype) %>%
+          select(-spchA, -spchB)
+      }
+    }
   } else {
     ABtbl <- ABtbl %>%
       rename(valA = spchA, valB = spchB) %>%
