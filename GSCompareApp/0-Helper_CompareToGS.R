@@ -156,3 +156,127 @@ intersect.tiers <- function(annA, annB, tiertype,
     return(ABtbl)
 }
 
+
+intersect.tiers.multi <- function(annA, annB, tierA, tierBset,
+                            seg_stt, seg_end, slice_sz) {
+  if (grepl("@", tierA)) {
+    spkr <- substr(tierA, 5, 7)
+    ttyp <- substr(tierA, 1, 3)
+  } else {
+    spkr <- tierA
+    ttyp <- "ort"
+  }
+  # Set up comparison table
+  ABtbl <- tibble(slice = seq(seg_stt, seg_end - slice_sz, slice_sz))
+  # For each match tier in the set, winnow down incorrect annotations
+  segA <- annA %>%
+    filter(speaker == spkr & stop > seg_stt & start < seg_end) %>%
+    mutate(coder = "A")
+  for (tierB in tierBset) {
+    segB <- annB %>%
+      filter(speaker == tierB & stop > seg_stt & start < seg_end) %>%
+      mutate(coder = "B")
+    # Use only the comparison subset of the annotations
+    segAB.spch <- bind_rows(segA, segB) %>% filter(!grepl("@", tier))
+    segAB.dpdt <- bind_rows(segA, segB) %>% filter(grepl(ttyp, tier))
+    # Set up comparison table
+    if (ttyp == "ort") {
+      ABtbl.temp <- tibble(
+        slice = seq(seg_stt, seg_end - slice_sz, slice_sz),
+        spchA = 0,
+        spchB = 0)
+    } else {
+      ABtbl.temp <- tibble(
+        slice = seq(seg_stt, seg_end - slice_sz, slice_sz),
+        spchA = 0,
+        spchB = 0,
+        valA = "NA",
+        valB = "NA")
+    }
+    # Fill in speech-on/off values for each tier
+    if(nrow(segAB.spch) > 0) {
+      for (row in 1:nrow(segAB.spch)) {
+        startannot <- ifelse(segAB.spch$start[row] < seg_stt, seg_stt,
+                             segAB.spch$start[row])
+        stopannot <- ifelse(segAB.spch$stop[row] > (seg_end - slice_sz),
+                            (seg_end - slice_sz),
+                            segAB.spch$stop[row])
+        if (segAB.spch$coder[row] == "A") {
+          ABtbl.temp$spchA[max(which(ABtbl.temp$slice <= startannot)):
+                       (min(which(ABtbl.temp$slice >= stopannot)))] <- 1
+        } else {
+          ABtbl.temp$spchB[max(which(ABtbl.temp$slice <= startannot)):
+                       (min(which(ABtbl.temp$slice >= stopannot)))] <- 1
+        }
+      }
+    }
+    # For non-orth tiers, fill in annotation values for each tier, then
+    # only take the intersection of speech == 1 for both A and B
+    if (ttyp != "ort") {
+      if(nrow(segAB.dpdt) > 0) {
+        for (row in 1:nrow(segAB.dpdt)) {
+          startannot <- ifelse(segAB.dpdt$start[row] < seg_stt, seg_stt,
+                               segAB.dpdt$start[row])
+          stopannot <- ifelse(segAB.dpdt$stop[row] > (seg_end - slice_sz),
+                            (seg_end - slice_sz),
+                              segAB.dpdt$stop[row])
+          valannot <- segAB.dpdt$code[row]
+          if (segAB.dpdt$coder[row] == "A") {
+            ABtbl.temp$valA[max(which(ABtbl.temp$slice <= startannot)):
+                         (min(which(ABtbl.temp$slice >= stopannot)))] <- valannot
+          } else {
+            ABtbl.temp$valB[max(which(ABtbl.temp$slice <= startannot)):
+                         (min(which(ABtbl.temp$slice >= stopannot)))] <- valannot
+          }
+        }
+      }
+      names(ABtbl.temp)[which(names(ABtbl.temp) == "valB")] <- paste0("val", tierB)
+    }
+    names(ABtbl.temp)[which(names(ABtbl.temp) == "spchB")] <- paste0("spch", tierB)
+    ABtbl <- left_join(ABtbl, ABtbl.temp)
+  }
+  if (ttyp == "ort") {
+    Bcols <- which(!grepl("A$", names(ABtbl)) &
+                     !grepl("slice", names(ABtbl)) &
+                     grepl("spch", names(ABtbl)))
+    ABtbl <- ABtbl %>%
+      unite(AllB, Bcols)
+    ABtbl$match <- mapply(grepl, pattern=ABtbl$spchA,
+                               x=ABtbl$AllB)
+  } else {
+    # Only count dependent tier vals for cases when there is at least one coder tier
+    # agreeing that speech is happening
+    spkrows <- which(rowSums(ABtbl[, which(grepl("spch", names(ABtbl)))]) > 1)
+    ABtbl <- ABtbl[spkrows,]
+    Bcols <- which(!grepl("A$", names(ABtbl)) &
+                     !grepl("slice", names(ABtbl)) &
+                     grepl("val", names(ABtbl)))
+    ABtbl <- ABtbl %>%
+      unite(AllB, Bcols)
+    if (ttyp == "xds") {
+      xds.loose.matches <- tibble(
+        GS = c('C', 'C', 'B', 'B', 'B', 'A', 'A', 'P', 'P', 'P', 'O', 'O', 'O', 'U', 'O', 'U'),
+        NW = c('C', 'B', 'B', 'C', 'A', 'A', 'B', 'P', 'O', 'U', 'O', 'P', 'U', 'P', 'O', 'U')
+      )
+      ABtbl$match <- mapply(grepl, pattern=ABtbl$valA,
+                              x=ABtbl$AllB)
+      ABtbl <- filter(ABtbl, valA != 'U') %>%
+        mutate(tier = tiertype)
+    } else if (ttyp == "vcm") {
+      vcm.loose.matches <- tibble(
+        GS = c('N', 'N', 'C', 'C', 'L', 'L', 'Y', 'Y', 'U'),
+        NW = c('N', 'C', 'C', 'N', 'L', 'Y', 'Y', 'L', 'U')
+      )
+      ABtbl$match <- mapply(grepl, pattern=ABtbl$valA,
+                              x=ABtbl$AllB)
+      ABtbl <- filter(ABtbl, valA != 'U') %>%
+        mutate(tier = tiertype)
+    } else {     # LEX and MWU
+      ABtbl$match <- mapply(grepl, pattern=ABtbl$valA,
+                              x=ABtbl$AllB)
+      ABtbl <- filter(ABtbl, valA != 'U') %>%
+        mutate(tier = tierA)
+    }
+  }
+  return(ABtbl)
+}
