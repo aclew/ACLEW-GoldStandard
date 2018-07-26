@@ -246,25 +246,31 @@ collapse.tiers.lena <- function(ann, seg_stt, seg_end) {
 }
 
 
-partial.match <- function(stringA, stringB) {
-  A.parts <- strsplit(stringA, '_')[[1]]
-  B.parts <- strsplit(stringB, '_')[[1]]
-  partial.ovlp <- ifelse(sum(A.parts %in% B.parts) > 0, 1, 0)
-  return(partial.ovlp)
+partial.match <- function(vecA, vecB) {
+  matches <- rep(0, length(vecA))
+  for (i in 1:length(vecA)) {
+    A.parts <- strsplit(vecA[i], '_')[[1]]
+    B.parts <- strsplit(vecB[i], '_')[[1]]
+    matches[i] <- ifelse(sum(A.parts %in% B.parts) > 0, 1, 0)
+  }
+  return(matches)
 }
 
-partial.match.loose <- function(stringGS, stringNW, loose.map) {
-  GS.parts <- strsplit(stringGS, '_')[[1]]
-  NW.parts <- strsplit(stringNW, '_')[[1]]
-  matches <- 0
-  for (part in GS.parts) {
-    if (part %in% loose.map$GS) {
-      acceptable.NW <- subset(loose.map, GS == part)$NW
-      matches <- matches + ifelse(sum(acceptable.NW %in% NW.parts) > 0, 1, 0)
+partial.match.loose <- function(vecGS, vecNW, loose.map) {
+  matches <- rep(0, length(vecGS))
+  for (i in 1:length(vecGS)) {
+    GS.parts <- strsplit(vecGS[i], '_')[[1]]
+    NW.parts <- strsplit(vecNW[i], '_')[[1]]
+    overlaps <- 0
+    for (part in GS.parts) {
+      if (part %in% loose.map$GS) {
+        acceptable.NW <- subset(loose.map, GS == part)$NW
+        overlaps <- overlaps + ifelse(sum(acceptable.NW %in% NW.parts) > 0, 1, 0)
+      }
     }
+    matches[i] <- ifelse(overlaps > 0, 1, 0)
   }
-  partial.ovlp <- ifelse(matches > 0, 1, 0)
-  return(partial.ovlp)
+  return(matches)
 }
 
 intersect.tiers.multi <- function(annA, annB, tiertype,
@@ -351,7 +357,7 @@ intersect.tiers.multi <- function(annA, annB, tiertype,
         )
       }
       ABtbl <- ABtbl %>%
-        filter(!(grepl('^U(_U)*$', valA)))
+        filter(!(grepl('^(U|NA)+(_(U|NA)+)*$', valA)))
       if (nrow(ABtbl) > 0) {
         ABtbl <- ABtbl %>%
           mutate(match = partial.match.loose(valA, valB, loose.matches), tier = tiertype) %>%

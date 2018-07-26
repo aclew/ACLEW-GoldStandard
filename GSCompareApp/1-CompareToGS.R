@@ -9,11 +9,11 @@ compare.files <- function(nw.filename, recording, native,
   # Set up
   ################################################################################
   
-  # nw.filename <- "9909-0GS0.txt"
-  # recording <- "9909"
+  # nw.filename <- "VanDamFJ11-GS_Training_Round_1-TS.txt"
+  # recording <- "VanFJ11"
   # native <- "Yes"
   # minute <- 1
-  # evaltype <- "Normal"
+  # evaltype <- "Last-chance"
   # coder <- "MC"
   # lab <- "MC"
   
