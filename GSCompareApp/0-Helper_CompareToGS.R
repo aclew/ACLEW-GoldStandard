@@ -123,7 +123,7 @@ intersect.tiers <- function(annA, annB, tiertype,
         filter(spchA == 1 & spchB == 1)
       if (ttyp == "xds") {
         xds.loose.matches <- tibble(
-          GS = c('C', 'C', 'B', 'B', 'B', 'A', 'A', 'P', 'P', 'P', 'O', 'O', 'O', 'U', 'O', 'U'),
+          GS = c('C', 'C', 'B', 'B', 'B', 'A', 'A', 'P', 'P', 'P', 'O', 'O', 'O', 'U', 'U', 'U'),
           NW = c('C', 'B', 'B', 'C', 'A', 'A', 'B', 'P', 'O', 'U', 'O', 'P', 'U', 'P', 'O', 'U')
         )
         ABtbl$match <- ifelse(paste0(ABtbl$valA, ABtbl$valA) %in%
@@ -347,7 +347,7 @@ intersect.tiers.multi <- function(annA, annB, tiertype,
     if (ttyp == "xds" | ttyp == "vcm") {
       if (ttyp == "xds") {
         loose.matches <- tibble(
-          GS = c('C', 'C', 'B', 'B', 'B', 'A', 'A', 'P', 'P', 'P', 'O', 'O', 'O', 'U', 'O', 'U', 'NA'),
+          GS = c('C', 'C', 'B', 'B', 'B', 'A', 'A', 'P', 'P', 'P', 'O', 'O', 'O', 'U', 'U', 'U', 'NA'),
           NW = c('C', 'B', 'B', 'C', 'A', 'A', 'B', 'P', 'O', 'U', 'O', 'P', 'U', 'P', 'O', 'U', 'NA')
           )
       } else {
