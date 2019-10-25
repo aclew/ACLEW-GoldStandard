@@ -29,6 +29,9 @@
     <pref key="LayoutManager.SplitPaneDividerLocation">
         <Int>103</Int>
     </pref>
+    <pref key="DetachedEditor.Bounds">
+        <Object class="java.awt.Rectangle">570,300,300,300</Object>
+    </pref>
     <pref key="TimeLineViewer.ZoomLevel">
         <Float>181.0</Float>
     </pref>
@@ -54,16 +57,16 @@
         <Object class="java.awt.Point">1,23</Object>
     </pref>
     <pref key="GridViewer.TierName">
-        <String>xds@MA1</String>
+        <String>vcm@CHI</String>
     </pref>
     <pref key="SelectionBeginTime">
-        <Long>294806</Long>
+        <Long>40088</Long>
     </pref>
     <pref key="LayoutManager.CurrentMode">
         <Int>1</Int>
     </pref>
     <pref key="MediaTime">
-        <Long>294805</Long>
+        <Long>41595</Long>
     </pref>
     <pref key="ExportTabDialog.SelectTiersMode">
         <String>Tier</String>
@@ -190,9 +193,12 @@
             <String>http://lux17.mpi.nl/aamlr/</String>
         </pref>
         <pref key="source_audio">
-            <String>///Users/mctice/Documents/Academic/Git-Projects/ACLEW-GoldStandard/Development-Errors/5959.wav</String>
+            <String>///Users/mctice/Documents/Academic/Git-Projects/ACLEW-GoldStandard/GSCompareApp/eafs/5959.wav</String>
         </pref>
     </prefGroup>
+    <pref key="MultiTierViewer.ActiveTierName">
+        <String>MA1</String>
+    </pref>
     <pref key="ActiveRecognizerName">
         <String>AAM-LR Phone level audio segmentation</String>
     </pref>
@@ -228,14 +234,11 @@
             <Int>75</Int>
         </pref>
     </prefGroup>
-    <pref key="MultiTierViewer.ActiveTierName">
-        <String>MA1</String>
-    </pref>
     <pref key="LayoutManager.ControlPanelWidth">
         <Int>167</Int>
     </pref>
     <pref key="TimeScaleBeginTime">
-        <Long>0</Long>
+        <Long>35667</Long>
     </pref>
     <prefList key="ExportTabDialog.HiddenTiers"/>
     <prefList key="MultiTierViewer.HiddenTiers"/>
@@ -243,6 +246,6 @@
         <Int>301</Int>
     </pref>
     <pref key="SelectionEndTime">
-        <Long>296469</Long>
+        <Long>41596</Long>
     </pref>
 </preferences>
