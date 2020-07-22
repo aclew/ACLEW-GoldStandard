@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ANNOTATION_DOCUMENT AUTHOR="" DATE="2020-07-22T12:12:36-06:00" FORMAT="3.0" VERSION="3.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.mpi.nl/tools/elan/EAFv3.0.xsd">
+<ANNOTATION_DOCUMENT AUTHOR="" DATE="2020-07-22T12:16:37-06:00" FORMAT="3.0" VERSION="3.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.mpi.nl/tools/elan/EAFv3.0.xsd">
     <HEADER MEDIA_FILE="" TIME_UNITS="milliseconds">
         <MEDIA_DESCRIPTOR MEDIA_URL="file:///S:/Soderstrom-Lab/CurrentStudies/DaylongAnnotationScheme/ACLEW/ACLEW-GoldStandard/GSCompareAppEs/eafs/5959.wav" MIME_TYPE="audio/x-wav" RELATIVE_MEDIA_URL="./5959.wav"/>
         <PROPERTY NAME="URN">urn:nl-mpi-tools-elan-eaf:9530e4de-2ffc-4414-aeac-09865a9b6f2a</PROPERTY>
