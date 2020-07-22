@@ -26,7 +26,7 @@
         <Int>301</Int>
     </pref>
     <pref key="SelectionEndTime">
-        <Long>288780</Long>
+        <Long>3889</Long>
     </pref>
     <pref key="ExportTabDialog.SelectTiersMode">
         <String>Tier</String>
@@ -42,7 +42,7 @@
         <String>mwu@CHI</String>
     </prefList>
     <pref key="SignalViewer.ZoomLevel">
-        <Float>40.999977</Float>
+        <Float>130.99997</Float>
     </pref>
     <pref key="LayoutManager.CurrentMode">
         <Int>1</Int>
@@ -190,7 +190,7 @@
         <String>Modification Date</String>
     </prefList>
     <pref key="GridViewer.TierName">
-        <String>CHI</String>
+        <String>MA1</String>
     </pref>
     <pref key="ActiveRecognizerName">
         <String>AAM-LR Phone level audio segmentation</String>
@@ -199,7 +199,7 @@
         <Object class="java.awt.Point">0,0</Object>
     </pref>
     <pref key="TimeLineViewer.ZoomLevel">
-        <Float>40.999977</Float>
+        <Float>130.99997</Float>
     </pref>
     <pref key="TimeLineViewer.ReducedTierHeight">
         <Boolean>true</Boolean>
@@ -208,22 +208,22 @@
         <Object class="java.awt.Rectangle">570,300,300,300</Object>
     </pref>
     <pref key="SelectionBeginTime">
-        <Long>287380</Long>
+        <Long>3080</Long>
     </pref>
     <prefGroup key="AAM-LR Phone level audio segmentation">
-        <pref key="source_audio">
-            <String>///S:/Soderstrom-Lab/CurrentStudies/DaylongAnnotationScheme/ACLEW/ACLEW-GoldStandard/GSCompareAppEs/eafs/5959.wav</String>
-        </pref>
         <pref key="base_url">
             <String>http://lux17.mpi.nl/aamlr/</String>
+        </pref>
+        <pref key="source_audio">
+            <String>///S:/Soderstrom-Lab/CurrentStudies/DaylongAnnotationScheme/ACLEW/ACLEW-GoldStandard/GSCompareAppEs/eafs/5959.wav</String>
         </pref>
     </prefGroup>
     <prefList key="MultiTierViewer.HiddenTiers"/>
     <pref key="TimeScaleBeginTime">
-        <Long>291910</Long>
+        <Long>0</Long>
     </pref>
     <pref key="MediaTime">
-        <Long>300096</Long>
+        <Long>3080</Long>
     </pref>
     <prefList key="MultiTierViewer.TierOrder">
         <String>CHI</String>
