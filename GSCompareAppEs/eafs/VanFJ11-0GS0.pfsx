@@ -24,7 +24,7 @@
         <Double>0.1023541453428864</Double>
     </pref>
     <pref key="SignalViewer.ZoomLevel">
-        <Float>62.0</Float>
+        <Float>251.99997</Float>
     </pref>
     <prefList key="ExportTabDialog.TierOrder">
         <String>CHI</String>
@@ -40,6 +40,7 @@
         <String>xds@UC2</String>
         <String>UC3</String>
         <String>xds@UC3</String>
+        <String>vcm@CHI</String>
     </prefList>
     <pref key="LayoutManager.CurrentMode">
         <Int>1</Int>
@@ -136,13 +137,13 @@
         <Object class="java.awt.Point">0,0</Object>
     </pref>
     <pref key="TimeLineViewer.ZoomLevel">
-        <Float>62.0</Float>
+        <Float>251.99997</Float>
     </pref>
     <pref key="TimeLineViewer.ReducedTierHeight">
         <Boolean>true</Boolean>
     </pref>
     <pref key="SelectionBeginTime">
-        <Long>240194</Long>
+        <Long>187049</Long>
     </pref>
     <pref key="InterlinearizationMode.RightTopBottomSplit">
         <Double>0.503582395087001</Double>
@@ -155,10 +156,10 @@
         <Int>12</Int>
     </pref>
     <pref key="TimeScaleBeginTime">
-        <Long>0</Long>
+        <Long>185353</Long>
     </pref>
     <pref key="MediaTime">
-        <Long>241832</Long>
+        <Long>187049</Long>
     </pref>
     <prefGroup key="TierColors">
         <pref key="UC1">
@@ -224,7 +225,7 @@
         <Int>185</Int>
     </pref>
     <pref key="SelectionEndTime">
-        <Long>241689</Long>
+        <Long>188216</Long>
     </pref>
     <pref key="ExportTabDialog.SelectTiersMode">
         <String>Participant</String>
@@ -265,6 +266,7 @@
         <String>CHI</String>
         <String>lex@CHI</String>
         <String>mwu@CHI</String>
+        <String>vcm@CHI</String>
         <String>FA1</String>
         <String>xds@FA1</String>
         <String>UC2</String>
@@ -295,7 +297,7 @@
         <Float>0.9</Float>
     </pref>
     <pref key="GridViewer.TierName">
-        <String>FA2</String>
+        <String>CHI</String>
     </pref>
     <pref key="ActiveRecognizerName">
         <String>AAM-LR Phone level audio segmentation</String>
