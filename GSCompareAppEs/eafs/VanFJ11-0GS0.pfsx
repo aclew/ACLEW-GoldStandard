@@ -2,7 +2,7 @@
 <preferences version="1.1"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.mpi.nl/tools/elan/Prefs_v1.1.xsd">
     <pref key="FrameSize">
-        <Object class="java.awt.Dimension">1616,876</Object>
+        <Object class="java.awt.Dimension">1600,860</Object>
     </pref>
     <prefList key="SegmentationViewer.TierOrder">
         <String>CHI</String>
@@ -24,7 +24,7 @@
         <Double>0.1023541453428864</Double>
     </pref>
     <pref key="SignalViewer.ZoomLevel">
-        <Float>388.00003</Float>
+        <Float>84.0</Float>
     </pref>
     <prefList key="ExportTabDialog.TierOrder">
         <String>CHI</String>
@@ -134,16 +134,16 @@
         </prefGroup>
     </prefGroup>
     <pref key="FrameLocation">
-        <Object class="java.awt.Point">-8,-8</Object>
+        <Object class="java.awt.Point">0,0</Object>
     </pref>
     <pref key="TimeLineViewer.ZoomLevel">
-        <Float>388.00003</Float>
+        <Float>84.0</Float>
     </pref>
     <pref key="TimeLineViewer.ReducedTierHeight">
         <Boolean>true</Boolean>
     </pref>
     <pref key="SelectionBeginTime">
-        <Long>190686</Long>
+        <Long>228400</Long>
     </pref>
     <pref key="InterlinearizationMode.RightTopBottomSplit">
         <Double>0.503582395087001</Double>
@@ -156,10 +156,10 @@
         <Int>12</Int>
     </pref>
     <pref key="TimeScaleBeginTime">
-        <Long>187244</Long>
+        <Long>212786</Long>
     </pref>
     <pref key="MediaTime">
-        <Long>190749</Long>
+        <Long>229060</Long>
     </pref>
     <prefGroup key="TierColors">
         <pref key="UC1">
@@ -198,7 +198,7 @@
         <String>xds@UC3</String>
     </prefList>
     <pref key="LayoutManager.SplitPaneDividerLocation">
-        <Int>85</Int>
+        <Int>2</Int>
     </pref>
     <pref key="TimeLineViewer.ActiveAnnotationBold">
         <Boolean>false</Boolean>
@@ -222,10 +222,10 @@
         <String>UC1</String>
     </pref>
     <pref key="LayoutManager.MediaAreaHeight">
-        <Int>185</Int>
+        <Int>271</Int>
     </pref>
     <pref key="SelectionEndTime">
-        <Long>190749</Long>
+        <Long>229060</Long>
     </pref>
     <pref key="ExportTabDialog.SelectTiersMode">
         <String>Participant</String>
@@ -297,7 +297,7 @@
         <Float>0.9</Float>
     </pref>
     <pref key="GridViewer.TierName">
-        <String>CHI</String>
+        <String>xds@UC3</String>
     </pref>
     <pref key="ActiveRecognizerName">
         <String>AAM-LR Phone level audio segmentation</String>
