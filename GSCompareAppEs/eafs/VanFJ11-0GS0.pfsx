@@ -2,7 +2,7 @@
 <preferences version="1.1"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.mpi.nl/tools/elan/Prefs_v1.1.xsd">
     <pref key="FrameSize">
-        <Object class="java.awt.Dimension">1366,728</Object>
+        <Object class="java.awt.Dimension">1616,876</Object>
     </pref>
     <prefList key="SegmentationViewer.TierOrder">
         <String>CHI</String>
@@ -24,7 +24,7 @@
         <Double>0.1023541453428864</Double>
     </pref>
     <pref key="SignalViewer.ZoomLevel">
-        <Float>251.99997</Float>
+        <Float>388.00003</Float>
     </pref>
     <prefList key="ExportTabDialog.TierOrder">
         <String>CHI</String>
@@ -134,16 +134,16 @@
         </prefGroup>
     </prefGroup>
     <pref key="FrameLocation">
-        <Object class="java.awt.Point">0,0</Object>
+        <Object class="java.awt.Point">-8,-8</Object>
     </pref>
     <pref key="TimeLineViewer.ZoomLevel">
-        <Float>251.99997</Float>
+        <Float>388.00003</Float>
     </pref>
     <pref key="TimeLineViewer.ReducedTierHeight">
         <Boolean>true</Boolean>
     </pref>
     <pref key="SelectionBeginTime">
-        <Long>187049</Long>
+        <Long>190686</Long>
     </pref>
     <pref key="InterlinearizationMode.RightTopBottomSplit">
         <Double>0.503582395087001</Double>
@@ -156,10 +156,10 @@
         <Int>12</Int>
     </pref>
     <pref key="TimeScaleBeginTime">
-        <Long>185353</Long>
+        <Long>187244</Long>
     </pref>
     <pref key="MediaTime">
-        <Long>187049</Long>
+        <Long>190749</Long>
     </pref>
     <prefGroup key="TierColors">
         <pref key="UC1">
@@ -225,7 +225,7 @@
         <Int>185</Int>
     </pref>
     <pref key="SelectionEndTime">
-        <Long>188216</Long>
+        <Long>190749</Long>
     </pref>
     <pref key="ExportTabDialog.SelectTiersMode">
         <String>Participant</String>
