@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ANNOTATION_DOCUMENT AUTHOR="" DATE="2020-08-11T13:57:37-06:00" FORMAT="3.0" VERSION="3.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.mpi.nl/tools/elan/EAFv3.0.xsd">
+<ANNOTATION_DOCUMENT AUTHOR="" DATE="2020-09-22T12:22:26-06:00" FORMAT="3.0" VERSION="3.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.mpi.nl/tools/elan/EAFv3.0.xsd">
     <HEADER MEDIA_FILE="" TIME_UNITS="milliseconds">
         <MEDIA_DESCRIPTOR MEDIA_URL="file:///S:/Soderstrom-Lab/CurrentStudies/DaylongAnnotationScheme/ACLEW/ACLEW-GoldStandard/GSCompareAppEs/eafs/5959.wav" MIME_TYPE="audio/x-wav" RELATIVE_MEDIA_URL="./5959.wav"/>
         <PROPERTY NAME="URN">urn:nl-mpi-tools-elan-eaf:9530e4de-2ffc-4414-aeac-09865a9b6f2a</PROPERTY>
@@ -157,7 +157,7 @@
         <TIME_SLOT TIME_SLOT_ID="ts149" TIME_VALUE="225104"/>
         <TIME_SLOT TIME_SLOT_ID="ts150" TIME_VALUE="225861"/>
         <TIME_SLOT TIME_SLOT_ID="ts151" TIME_VALUE="226360"/>
-        <TIME_SLOT TIME_SLOT_ID="ts152" TIME_VALUE="227360"/>
+        <TIME_SLOT TIME_SLOT_ID="ts152" TIME_VALUE="228022"/>
         <TIME_SLOT TIME_SLOT_ID="ts153" TIME_VALUE="228160"/>
         <TIME_SLOT TIME_SLOT_ID="ts154" TIME_VALUE="234171"/>
         <TIME_SLOT TIME_SLOT_ID="ts155" TIME_VALUE="234259"/>
@@ -467,7 +467,7 @@
         </ANNOTATION>
         <ANNOTATION>
             <ALIGNABLE_ANNOTATION ANNOTATION_ID="a703" TIME_SLOT_REF1="ts75" TIME_SLOT_REF2="ts76">
-                <ANNOTATION_VALUE>xxx I say what I want.</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>it's like I say what I want.</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
@@ -522,12 +522,12 @@
         </ANNOTATION>
         <ANNOTATION>
             <ALIGNABLE_ANNOTATION ANNOTATION_ID="a714" TIME_SLOT_REF1="ts145" TIME_SLOT_REF2="ts146">
-                <ANNOTATION_VALUE>quite.</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>quite-.</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
             <ALIGNABLE_ANNOTATION ANNOTATION_ID="a715" TIME_SLOT_REF1="ts147" TIME_SLOT_REF2="ts149">
-                <ANNOTATION_VALUE>the dramatic actor.</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>-the dramatic actor.</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
@@ -547,7 +547,7 @@
         </ANNOTATION>
         <ANNOTATION>
             <ALIGNABLE_ANNOTATION ANNOTATION_ID="a719" TIME_SLOT_REF1="ts163" TIME_SLOT_REF2="ts164">
-                <ANNOTATION_VALUE>I think it's a valentine's day present.</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>I think it's a Valentine's_Day present.</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
@@ -557,7 +557,7 @@
         </ANNOTATION>
         <ANNOTATION>
             <ALIGNABLE_ANNOTATION ANNOTATION_ID="a721" TIME_SLOT_REF1="ts169" TIME_SLOT_REF2="ts170">
-                <ANNOTATION_VALUE>I check the mail yesterday.</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>I didn't check the mail yesterday.</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
@@ -572,12 +572,12 @@
         </ANNOTATION>
         <ANNOTATION>
             <ALIGNABLE_ANNOTATION ANNOTATION_ID="a724" TIME_SLOT_REF1="ts175" TIME_SLOT_REF2="ts176">
-                <ANNOTATION_VALUE>Grams used to mail.</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>Grams used to mail-.</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
             <ALIGNABLE_ANNOTATION ANNOTATION_ID="a725" TIME_SLOT_REF1="ts177" TIME_SLOT_REF2="ts178">
-                <ANNOTATION_VALUE>Mom, valentine's day packages.</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>Mom, Valentine's_Day packages.</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
@@ -592,7 +592,7 @@
         </ANNOTATION>
         <ANNOTATION>
             <ALIGNABLE_ANNOTATION ANNOTATION_ID="a728" TIME_SLOT_REF1="ts192" TIME_SLOT_REF2="ts194">
-                <ANNOTATION_VALUE>trying fix the toilet, yeah.</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>try and fix the toilet, yeah.</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
@@ -704,22 +704,22 @@
         </ANNOTATION>
         <ANNOTATION>
             <ALIGNABLE_ANNOTATION ANNOTATION_ID="a749" TIME_SLOT_REF1="ts122" TIME_SLOT_REF2="ts124">
-                <ANNOTATION_VALUE>xxx.</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>thank-you it was-.</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
             <ALIGNABLE_ANNOTATION ANNOTATION_ID="a750" TIME_SLOT_REF1="ts125" TIME_SLOT_REF2="ts126">
-                <ANNOTATION_VALUE>xxx.</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>delicious.</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
             <ALIGNABLE_ANNOTATION ANNOTATION_ID="a751" TIME_SLOT_REF1="ts148" TIME_SLOT_REF2="ts150">
-                <ANNOTATION_VALUE>quite the dramatic baby.</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>quite dramatic baby.</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
             <ALIGNABLE_ANNOTATION ANNOTATION_ID="a999" TIME_SLOT_REF1="ts151" TIME_SLOT_REF2="ts152">
-                <ANNOTATION_VALUE>&lt;quite quite&gt; [=! whispers].</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>&lt;quite dramatic&gt; [=! whispers].</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
@@ -729,7 +729,7 @@
         </ANNOTATION>
         <ANNOTATION>
             <ALIGNABLE_ANNOTATION ANNOTATION_ID="a753" TIME_SLOT_REF1="ts161" TIME_SLOT_REF2="ts162">
-                <ANNOTATION_VALUE>good.</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>really?</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
@@ -739,22 +739,22 @@
         </ANNOTATION>
         <ANNOTATION>
             <ALIGNABLE_ANNOTATION ANNOTATION_ID="a755" TIME_SLOT_REF1="ts185" TIME_SLOT_REF2="ts186">
-                <ANNOTATION_VALUE>xxx dishes.</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>should we do the dishes-.</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
             <ALIGNABLE_ANNOTATION ANNOTATION_ID="a756" TIME_SLOT_REF1="ts187" TIME_SLOT_REF2="ts188">
-                <ANNOTATION_VALUE>and-.</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>and then-.</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
             <ALIGNABLE_ANNOTATION ANNOTATION_ID="a757" TIME_SLOT_REF1="ts189" TIME_SLOT_REF2="ts190">
-                <ANNOTATION_VALUE>xxx.</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>xxx the-.</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
             <ALIGNABLE_ANNOTATION ANNOTATION_ID="a758" TIME_SLOT_REF1="ts191" TIME_SLOT_REF2="ts193">
-                <ANNOTATION_VALUE>xxx.</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>toilet?</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>

@@ -2,7 +2,7 @@
 <preferences version="1.1"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.mpi.nl/tools/elan/Prefs_v1.1.xsd">
     <pref key="FrameSize">
-        <Object class="java.awt.Dimension">1600,860</Object>
+        <Object class="java.awt.Dimension">1366,728</Object>
     </pref>
     <pref key="MultiTierViewer.TierSortingMode">
         <Int>1</Int>
@@ -17,16 +17,19 @@
         <Int>167</Int>
     </pref>
     <pref key="SegmentationViewer.ZoomLevel">
-        <Float>240.0</Float>
+        <Float>130.0</Float>
     </pref>
     <pref key="MultiTierViewer.ActiveTierName">
         <String>MA1</String>
     </pref>
     <pref key="LayoutManager.MediaAreaHeight">
-        <Int>713</Int>
+        <Int>323</Int>
     </pref>
     <pref key="SelectionEndTime">
-        <Long>62403</Long>
+        <Long>300090</Long>
+    </pref>
+    <pref key="GridViewer.FontSize">
+        <Int>16</Int>
     </pref>
     <pref key="ExportTabDialog.SelectTiersMode">
         <String>Tier</String>
@@ -190,7 +193,7 @@
         <String>Modification Date</String>
     </prefList>
     <pref key="GridViewer.TierName">
-        <String>MA1</String>
+        <String>FA1</String>
     </pref>
     <pref key="ActiveRecognizerName">
         <String>AAM-LR Phone level audio segmentation</String>
@@ -208,7 +211,7 @@
         <Object class="java.awt.Rectangle">570,300,300,300</Object>
     </pref>
     <pref key="SelectionBeginTime">
-        <Long>61149</Long>
+        <Long>298364</Long>
     </pref>
     <prefGroup key="AAM-LR Phone level audio segmentation">
         <pref key="base_url">
@@ -220,10 +223,10 @@
     </prefGroup>
     <prefList key="MultiTierViewer.HiddenTiers"/>
     <pref key="TimeScaleBeginTime">
-        <Long>53740</Long>
+        <Long>0</Long>
     </pref>
     <pref key="MediaTime">
-        <Long>63029</Long>
+        <Long>867</Long>
     </pref>
     <prefList key="MultiTierViewer.TierOrder">
         <String>CHI</String>
