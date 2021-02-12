@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ANNOTATION_DOCUMENT AUTHOR="" DATE="2020-09-18T13:24:18-06:00" FORMAT="3.0" VERSION="3.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.mpi.nl/tools/elan/EAFv3.0.xsd">
+<ANNOTATION_DOCUMENT AUTHOR="" DATE="2020-10-06T13:48:04-03:00" FORMAT="3.0" VERSION="3.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.mpi.nl/tools/elan/EAFv3.0.xsd">
     <HEADER MEDIA_FILE="" TIME_UNITS="milliseconds">
-        <MEDIA_DESCRIPTOR MEDIA_URL="file:///S:/Soderstrom-Lab/CurrentStudies/DaylongAnnotationScheme/ACLEW/ACLEW-GoldStandard/GSCompareAppEs/eafs/5271.wav" MIME_TYPE="audio/x-wav" RELATIVE_MEDIA_URL="./5271.wav"/>
+        <MEDIA_DESCRIPTOR MEDIA_URL="file:///Users/cgiordano/ciipme/GS/ROS_5271_20_01_03600.mp3" MIME_TYPE="audio/*" RELATIVE_MEDIA_URL="./ROS_5271_20_01_03600.mp3"/>
         <PROPERTY NAME="URN">urn:nl-mpi-tools-elan-eaf:87662f65-0836-4f89-8a17-152770ccdb38</PROPERTY>
         <PROPERTY NAME="lastUsedAnnotationId">475</PROPERTY>
     </HEADER>
@@ -404,7 +404,7 @@
         <TIME_SLOT TIME_SLOT_ID="ts396" TIME_VALUE="296213"/>
         <TIME_SLOT TIME_SLOT_ID="ts397" TIME_VALUE="296413"/>
         <TIME_SLOT TIME_SLOT_ID="ts398" TIME_VALUE="296635"/>
-        <TIME_SLOT TIME_SLOT_ID="ts399" TIME_VALUE="297072"/>
+        <TIME_SLOT TIME_SLOT_ID="ts399" TIME_VALUE="296706"/>
         <TIME_SLOT TIME_SLOT_ID="ts400" TIME_VALUE="297110"/>
         <TIME_SLOT TIME_SLOT_ID="ts401" TIME_VALUE="297298"/>
         <TIME_SLOT TIME_SLOT_ID="ts402" TIME_VALUE="298458"/>
@@ -568,7 +568,7 @@
     <TIER LINGUISTIC_TYPE_REF="transcription" PARTICIPANT="FA1" TIER_ID="FA1">
         <ANNOTATION>
             <ALIGNABLE_ANNOTATION ANNOTATION_ID="a67" TIME_SLOT_REF1="ts1" TIME_SLOT_REF2="ts2">
-                <ANNOTATION_VALUE>mucho sol!</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>&lt;mucho sol&gt; [=! alarga].</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
@@ -578,7 +578,7 @@
         </ANNOTATION>
         <ANNOTATION>
             <ALIGNABLE_ANNOTATION ANNOTATION_ID="a69" TIME_SLOT_REF1="ts8" TIME_SLOT_REF2="ts10">
-                <ANNOTATION_VALUE>mm-hm un frío a ver.</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>&amp;=ríe.</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
@@ -713,7 +713,7 @@
         </ANNOTATION>
         <ANNOTATION>
             <ALIGNABLE_ANNOTATION ANNOTATION_ID="a96" TIME_SLOT_REF1="ts101" TIME_SLOT_REF2="ts102">
-                <ANNOTATION_VALUE>y esto? mirá qué rico!</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>y esto, mirá qué rico!</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
@@ -753,7 +753,7 @@
         </ANNOTATION>
         <ANNOTATION>
             <ALIGNABLE_ANNOTATION ANNOTATION_ID="a470" TIME_SLOT_REF1="ts134" TIME_SLOT_REF2="ts135">
-                <ANNOTATION_VALUE>es a-</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>es a-.</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
@@ -778,7 +778,7 @@
         </ANNOTATION>
         <ANNOTATION>
             <ALIGNABLE_ANNOTATION ANNOTATION_ID="a108" TIME_SLOT_REF1="ts161" TIME_SLOT_REF2="ts165">
-                <ANNOTATION_VALUE>bueno, por eso te voy a- </ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>bueno, por eso te voy a-.</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
@@ -838,7 +838,7 @@
         </ANNOTATION>
         <ANNOTATION>
             <ALIGNABLE_ANNOTATION ANNOTATION_ID="a120" TIME_SLOT_REF1="ts214" TIME_SLOT_REF2="ts215">
-                <ANNOTATION_VALUE>bue [: bueno].</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>&lt;bue&gt; [: bueno].</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
@@ -908,7 +908,7 @@
         </ANNOTATION>
         <ANNOTATION>
             <ALIGNABLE_ANNOTATION ANNOTATION_ID="a134" TIME_SLOT_REF1="ts266" TIME_SLOT_REF2="ts267">
-                <ANNOTATION_VALUE>qué pasó? se cayó xxx.</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>qué pasó, se cayó xxx.</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
@@ -923,7 +923,7 @@
         </ANNOTATION>
         <ANNOTATION>
             <ALIGNABLE_ANNOTATION ANNOTATION_ID="a137" TIME_SLOT_REF1="ts275" TIME_SLOT_REF2="ts276">
-                <ANNOTATION_VALUE>no &lt;siempre no siempre&gt; [=! ríe] te doy en el de Angry_Birds.</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>no &lt;siempre no siempre&gt; [&amp;=ríe] te doy en el de Angry_Birds.</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
@@ -963,7 +963,7 @@
         </ANNOTATION>
         <ANNOTATION>
             <ALIGNABLE_ANNOTATION ANNOTATION_ID="a145" TIME_SLOT_REF1="ts303" TIME_SLOT_REF2="ts304">
-                <ANNOTATION_VALUE>qué ha-.</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>qué.</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
@@ -1003,12 +1003,12 @@
         </ANNOTATION>
         <ANNOTATION>
             <ALIGNABLE_ANNOTATION ANNOTATION_ID="a153" TIME_SLOT_REF1="ts334" TIME_SLOT_REF2="ts335">
-                <ANNOTATION_VALUE>buen [: bueno] ya está.</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>&lt;buen&gt; [: bueno] ya está.</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
             <ALIGNABLE_ANNOTATION ANNOTATION_ID="a154" TIME_SLOT_REF1="ts337" TIME_SLOT_REF2="ts338">
-                <ANNOTATION_VALUE>ahistá [: ahí está], ya no va a entrar ninguna mosca.</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>&lt;ahistá&gt; [: ahí está], ya no va a entrar ninguna mosca.</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
@@ -1018,7 +1018,7 @@
         </ANNOTATION>
         <ANNOTATION>
             <ALIGNABLE_ANNOTATION ANNOTATION_ID="a156" TIME_SLOT_REF1="ts345" TIME_SLOT_REF2="ts346">
-                <ANNOTATION_VALUE>ahistá [: ahí está].</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>&lt;ahistá&gt; [: ahí está].</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
@@ -1093,7 +1093,7 @@
         </ANNOTATION>
         <ANNOTATION>
             <ALIGNABLE_ANNOTATION ANNOTATION_ID="a171" TIME_SLOT_REF1="ts387" TIME_SLOT_REF2="ts388">
-                <ANNOTATION_VALUE>ahistá [: ahí está].</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>&lt;ahistá&gt; [: ahí está].</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
@@ -1103,34 +1103,34 @@
         </ANNOTATION>
         <ANNOTATION>
             <ALIGNABLE_ANNOTATION ANNOTATION_ID="a173" TIME_SLOT_REF1="ts394" TIME_SLOT_REF2="ts396">
-                <ANNOTATION_VALUE>le teléfono.</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>mi teléfono?</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
             <ALIGNABLE_ANNOTATION ANNOTATION_ID="a174" TIME_SLOT_REF1="ts397" TIME_SLOT_REF2="ts399">
-                <ANNOTATION_VALUE>pues así.</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>puede ser.</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
             <ALIGNABLE_ANNOTATION ANNOTATION_ID="a175" TIME_SLOT_REF1="ts403" TIME_SLOT_REF2="ts404">
-                <ANNOTATION_VALUE>a sí verdad.</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>ah sí el celular.</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
     </TIER>
     <TIER LINGUISTIC_TYPE_REF="transcription" PARTICIPANT="FA2" TIER_ID="FA2">
         <ANNOTATION>
             <ALIGNABLE_ANNOTATION ANNOTATION_ID="a176" TIME_SLOT_REF1="ts3" TIME_SLOT_REF2="ts4">
-                <ANNOTATION_VALUE>xxx.</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>veinti ocho grados me parece que están haciendo eh.</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
             <ALIGNABLE_ANNOTATION ANNOTATION_ID="a177" TIME_SLOT_REF1="ts7" TIME_SLOT_REF2="ts9">
-                <ANNOTATION_VALUE>xxx la regla xxx.</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>o sea, está re loco el tiempo o hace calor o hace frío.</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
             <ALIGNABLE_ANNOTATION ANNOTATION_ID="a178" TIME_SLOT_REF1="ts110" TIME_SLOT_REF2="ts112">
-                <ANNOTATION_VALUE>xxx.</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>en serio?</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
@@ -1235,79 +1235,79 @@
         </ANNOTATION>
         <ANNOTATION>
             <ALIGNABLE_ANNOTATION ANNOTATION_ID="a199" TIME_SLOT_REF1="ts393" TIME_SLOT_REF2="ts395">
-                <ANNOTATION_VALUE>xxx.</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>no se ve para allá.</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
             <ALIGNABLE_ANNOTATION ANNOTATION_ID="a200" TIME_SLOT_REF1="ts398" TIME_SLOT_REF2="ts400">
-                <ANNOTATION_VALUE>al-.</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>ahh.</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
             <ALIGNABLE_ANNOTATION ANNOTATION_ID="a201" TIME_SLOT_REF1="ts401" TIME_SLOT_REF2="ts402">
-                <ANNOTATION_VALUE>hola sé acá. </ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>xxx puse la traba.</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
             <ALIGNABLE_ANNOTATION ANNOTATION_ID="a202" TIME_SLOT_REF1="ts405" TIME_SLOT_REF2="ts406">
-                <ANNOTATION_VALUE>ah.</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>ahh.</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
     </TIER>
     <TIER LINGUISTIC_TYPE_REF="transcription" PARTICIPANT="MC1" TIER_ID="MC1">
         <ANNOTATION>
             <ALIGNABLE_ANNOTATION ANNOTATION_ID="a203" TIME_SLOT_REF1="ts105" TIME_SLOT_REF2="ts106">
-                <ANNOTATION_VALUE>yo pueda.</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>chu fuera!</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
             <ALIGNABLE_ANNOTATION ANNOTATION_ID="a204" TIME_SLOT_REF1="ts113" TIME_SLOT_REF2="ts115">
-                <ANNOTATION_VALUE>xxx.</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>mnn.</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
             <ALIGNABLE_ANNOTATION ANNOTATION_ID="a205" TIME_SLOT_REF1="ts120" TIME_SLOT_REF2="ts122">
-                <ANNOTATION_VALUE>xxx.</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>bua!</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
             <ALIGNABLE_ANNOTATION ANNOTATION_ID="a206" TIME_SLOT_REF1="ts123" TIME_SLOT_REF2="ts125">
-                <ANNOTATION_VALUE>yo xxx.</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>yo que- yo quiero mi leche!</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
             <ALIGNABLE_ANNOTATION ANNOTATION_ID="a207" TIME_SLOT_REF1="ts129" TIME_SLOT_REF2="ts132">
-                <ANNOTATION_VALUE>xxx.</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>xxx!</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
             <ALIGNABLE_ANNOTATION ANNOTATION_ID="a208" TIME_SLOT_REF1="ts133" TIME_SLOT_REF2="ts136">
-                <ANNOTATION_VALUE>eso.</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>xxx.</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
             <ALIGNABLE_ANNOTATION ANNOTATION_ID="a209" TIME_SLOT_REF1="ts138" TIME_SLOT_REF2="ts140">
-                <ANNOTATION_VALUE>saca de la xxx.</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>sácale la mosca y vol-.</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
             <ALIGNABLE_ANNOTATION ANNOTATION_ID="a210" TIME_SLOT_REF1="ts142" TIME_SLOT_REF2="ts149">
-                <ANNOTATION_VALUE>oréme que nunca xxx.</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>xxx la leche en un vasito.</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
             <ALIGNABLE_ANNOTATION ANNOTATION_ID="a211" TIME_SLOT_REF1="ts159" TIME_SLOT_REF2="ts160">
-                <ANNOTATION_VALUE>no.</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>no!</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
             <ALIGNABLE_ANNOTATION ANNOTATION_ID="a212" TIME_SLOT_REF1="ts164" TIME_SLOT_REF2="ts166">
-                <ANNOTATION_VALUE>no sepas, cierras los labios mm!</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>sácala, sácala de ahí!</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
             <ALIGNABLE_ANNOTATION ANNOTATION_ID="a213" TIME_SLOT_REF1="ts175" TIME_SLOT_REF2="ts176">
-                <ANNOTATION_VALUE>la pinchála á &lt;ora&gt; [: oreja].</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>la pinchala ahora.</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
@@ -1317,122 +1317,122 @@
         </ANNOTATION>
         <ANNOTATION>
             <ALIGNABLE_ANNOTATION ANNOTATION_ID="a215" TIME_SLOT_REF1="ts191" TIME_SLOT_REF2="ts192">
-                <ANNOTATION_VALUE>xxx.</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>sí.</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
             <ALIGNABLE_ANNOTATION ANNOTATION_ID="a216" TIME_SLOT_REF1="ts193" TIME_SLOT_REF2="ts194">
-                <ANNOTATION_VALUE>y nunca  xxx.</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>y nunca se metan!</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
             <ALIGNABLE_ANNOTATION ANNOTATION_ID="a217" TIME_SLOT_REF1="ts195" TIME_SLOT_REF2="ts197">
-                <ANNOTATION_VALUE>y nunca quiero que te xxx.</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>y nunca quiero que se metan en mi leche.</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
             <ALIGNABLE_ANNOTATION ANNOTATION_ID="a218" TIME_SLOT_REF1="ts203" TIME_SLOT_REF2="ts205">
-                <ANNOTATION_VALUE>xxx.</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>xxx mi leche?</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
             <ALIGNABLE_ANNOTATION ANNOTATION_ID="a219" TIME_SLOT_REF1="ts211" TIME_SLOT_REF2="ts212">
-                <ANNOTATION_VALUE>xxx.</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>ahh pero esa xxx.</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
             <ALIGNABLE_ANNOTATION ANNOTATION_ID="a220" TIME_SLOT_REF1="ts213" TIME_SLOT_REF2="ts217">
-                <ANNOTATION_VALUE>xxx.</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>yo quiero xxx!</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
             <ALIGNABLE_ANNOTATION ANNOTATION_ID="a221" TIME_SLOT_REF1="ts219" TIME_SLOT_REF2="ts220">
-                <ANNOTATION_VALUE>por yo quería y te vaso.</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>pero yo quería ese vaso.</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
             <ALIGNABLE_ANNOTATION ANNOTATION_ID="a222" TIME_SLOT_REF1="ts224" TIME_SLOT_REF2="ts232">
-                <ANNOTATION_VALUE>xxx.</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>xxx esta leche xxx.</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
             <ALIGNABLE_ANNOTATION ANNOTATION_ID="a223" TIME_SLOT_REF1="ts234" TIME_SLOT_REF2="ts236">
-                <ANNOTATION_VALUE>0.</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>dame de esa leche!</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
             <ALIGNABLE_ANNOTATION ANNOTATION_ID="a224" TIME_SLOT_REF1="ts238" TIME_SLOT_REF2="ts241">
-                <ANNOTATION_VALUE>0.</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>si ahora xxx.</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
             <ALIGNABLE_ANNOTATION ANNOTATION_ID="a225" TIME_SLOT_REF1="ts244" TIME_SLOT_REF2="ts250">
-                <ANNOTATION_VALUE>0.</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>pero yo quiero esa leche en ese vaso.</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
             <ALIGNABLE_ANNOTATION ANNOTATION_ID="a226" TIME_SLOT_REF1="ts258" TIME_SLOT_REF2="ts260">
-                <ANNOTATION_VALUE>0.</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>yo quería.</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
             <ALIGNABLE_ANNOTATION ANNOTATION_ID="a227" TIME_SLOT_REF1="ts262" TIME_SLOT_REF2="ts269">
-                <ANNOTATION_VALUE>0.</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>pero yo xxx.</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
             <ALIGNABLE_ANNOTATION ANNOTATION_ID="a228" TIME_SLOT_REF1="ts270" TIME_SLOT_REF2="ts273">
-                <ANNOTATION_VALUE>0.</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>tú me lo diste siempre.</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
             <ALIGNABLE_ANNOTATION ANNOTATION_ID="a229" TIME_SLOT_REF1="ts277" TIME_SLOT_REF2="ts281">
-                <ANNOTATION_VALUE>0.</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>pero yo quiero ese xxx.</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
             <ALIGNABLE_ANNOTATION ANNOTATION_ID="a230" TIME_SLOT_REF1="ts285" TIME_SLOT_REF2="ts291">
-                <ANNOTATION_VALUE>0.</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>pero yo quiero que ponga esa leche ahí.</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
             <ALIGNABLE_ANNOTATION ANNOTATION_ID="a231" TIME_SLOT_REF1="ts293" TIME_SLOT_REF2="ts295">
-                <ANNOTATION_VALUE>0.</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>la pones ahí?</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
             <ALIGNABLE_ANNOTATION ANNOTATION_ID="a232" TIME_SLOT_REF1="ts306" TIME_SLOT_REF2="ts309">
-                <ANNOTATION_VALUE>0.</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>no me gusta la mosca!</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
             <ALIGNABLE_ANNOTATION ANNOTATION_ID="a233" TIME_SLOT_REF1="ts311" TIME_SLOT_REF2="ts315">
-                <ANNOTATION_VALUE>0.</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>cierren la ventana ahora!</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
             <ALIGNABLE_ANNOTATION ANNOTATION_ID="a234" TIME_SLOT_REF1="ts324" TIME_SLOT_REF2="ts326">
-                <ANNOTATION_VALUE>0.</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>cerrala!</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
             <ALIGNABLE_ANNOTATION ANNOTATION_ID="a235" TIME_SLOT_REF1="ts327" TIME_SLOT_REF2="ts329">
-                <ANNOTATION_VALUE>0.</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>la ventana mami.</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
             <ALIGNABLE_ANNOTATION ANNOTATION_ID="a236" TIME_SLOT_REF1="ts332" TIME_SLOT_REF2="ts336">
-                <ANNOTATION_VALUE>0.</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>cerra las ventanas, las dos.</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
             <ALIGNABLE_ANNOTATION ANNOTATION_ID="a237" TIME_SLOT_REF1="ts339" TIME_SLOT_REF2="ts340">
-                <ANNOTATION_VALUE>0.</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>jmn.</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
             <ALIGNABLE_ANNOTATION ANNOTATION_ID="a238" TIME_SLOT_REF1="ts341" TIME_SLOT_REF2="ts342">
-                <ANNOTATION_VALUE>0.</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>y si alguien entra en mi leche me enojo un montón.</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
     </TIER>
