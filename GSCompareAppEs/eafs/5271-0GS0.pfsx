@@ -107,7 +107,7 @@
         <String>Modification Date</String>
     </prefList>
     <pref key="GridViewer.TierName">
-        <String>CHI</String>
+        <String>mwu@CHI</String>
     </pref>
     <pref key="ActiveRecognizerName">
         <String>AAM-LR Phone level audio segmentation</String>
@@ -130,9 +130,6 @@
     <prefGroup key="AAM-LR Phone level audio segmentation">
         <pref key="base_url">
             <String>http://lux17.mpi.nl/aamlr/</String>
-        </pref>
-        <pref key="source_audio">
-            <String>///S:/Soderstrom-Lab/CurrentStudies/DaylongAnnotationScheme/ACLEW/ACLEW-GoldStandard/GSCompareAppEs/eafs/5271.wav</String>
         </pref>
     </prefGroup>
     <pref key="MediaControlRate">
@@ -170,7 +167,7 @@
         </pref>
     </prefGroup>
     <pref key="LayoutManager.SplitPaneDividerLocation">
-        <Int>70</Int>
+        <Int>1</Int>
     </pref>
     <prefList key="CommentViewer.Columns.Hidden">
         <String>Sender</String>
